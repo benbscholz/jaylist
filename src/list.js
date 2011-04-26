@@ -3,7 +3,7 @@
  */
  
 var MAX_ELEMENTS = 100;
-var HASH_MULTIPLIER = 73;
+var HASH_MULTIPLIER = 37;
 
 var List = function () {
     this.h_list = [];
