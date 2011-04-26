@@ -2,9 +2,13 @@
  * list.js provides the functions to create a hashed key-value list.
  */
  
-var MAX_ELEMENTS = 100;
-var HASH_MULTIPLIER = 37;
+var MAX_ELEMENTS = 100;     /* maximum elements for all lists */
+var HASH_MULTIPLIER = 37;   /* prime multiplier for hash function */
 
+
+/**
+ * List allows to access elements through a key (string of characters)
+ */
 var List = function () {
     this.h_list = [];
     this.h_list.length = MAX_ELEMENTS;
@@ -47,8 +51,5 @@ List.prototype = {
 
 };
 
-var li = new List();
-li.add("ben", "scholz");
-window.document.writeln(li.get("ben"));
 
 
