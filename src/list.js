@@ -66,6 +66,8 @@ List.prototype = {
     
     /*
      add: inserts an object into the list, assigning it to the given key.
+     It returns the value upon successful addition to the list. Otherwise,
+     it returns false.
      */
     add: function (key, value) {
         var h, entry, nextentry;
@@ -75,6 +77,7 @@ List.prototype = {
         // if the hash corresponds to nothing, add the entry
         if (this.h_list[h] === undefined) {
             this.h_list[h] = entry;
+            return this.h_list[h].val;
         } else {
             nextentry = this.h_list[h];
             // iterate to the last item at that hash value in the list
@@ -82,34 +85,38 @@ List.prototype = {
                 nextentry = nextentry.next;
             }
             nextentry.next = entry;
+            return nextentry.next.val;
         }
+        return false;
     },
     
     
     /*
-     remove: removes an object from the list with the given key, returning false if no object
-     with the given key exists in the list.
+     remove: removes an object from the list with the given key. It returns
+     false if no object with the given key exists in the list. Otherwise, it
+     returns true upon successful removal.
      */
     remove: function (key) {
-        var h, preventry, nextentry;
+        var h, currente, nexte;
         h = this.mash(key);
         // if the hash corresponds to nothing, return false
         if (this.h_list[h] === undefined) {
             return false;
         } else {
-            nextentry = this.h_list[h];
+            nexte = this.h_list[h];
             // iterate through the entries with the hash
-            while (nextentry !== undefined) {
+            while (nexte !== undefined) {
                 // if the key matches the first entry, connect h_list to the next chain in the list
-                if (nextentry.key === key && preventry === undefined) {
-                    this.h_list[h] = nextentry.next;
-                    return;
-                } else if (nextentry.key === key) {
-                    preventry.next = nextentry.next;
+                if (nexte.key === key && currente === undefined) {
+                    this.h_list[h] = nexte.next;
+                    return true;
+                } else if (nexte.key === key) {
+                    currente.next = nexte.next;
+                    return true;
                 }
                 // increment the entry placeholders
-                preventry = nextentry;
-                nextentry = nextentry.next;
+                currente = nexte;
+                nexte = nexte.next;
             }
             // nothing found
             return false;
