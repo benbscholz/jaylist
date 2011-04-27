@@ -7,9 +7,7 @@ The global constant MAX_ELEMENTS determines the initialized list
 size. This value need only be changed if the set of values is known
 to be very small or very large. 
 
-list.js can be extended to dynamically
-adjust the size of the list, although that is not necessarily a top
-priority. This code is licensed under the GPLv3.
+This code is licensed under the GPLv3.
 
 */
  
