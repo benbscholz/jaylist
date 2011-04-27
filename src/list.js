@@ -91,7 +91,7 @@ List.prototype = {
      with the given key exists in the list.
      */
     remove: function (key) {
-        var h, nextentry;
+        var h, preventry, nextentry;
         h = this.mash(key);
         // if the hash corresponds to nothing, return false
         if (this.h_list[h] === undefined) {
@@ -99,6 +99,18 @@ List.prototype = {
         } else {
             nextentry = this.h_list[h];
             // iterate through the entries with the hash
+            while (nextentry !== undefined) {
+                // if the key matches the first entry, connect h_list to the next chain in the list
+                if (nextentry.key === key && preventry === undefined) {
+                    this.h_list[h] = nextentry.next;
+                    return;
+                }
+                // increment the entry placeholders
+                preventry = nextentry;
+                nextentry = nextentry.next;
+            }
+            // nothing found
+            return false;
         }
     },
      
@@ -117,10 +129,3 @@ List.prototype = {
     
      
 };
-
-
-var listy = new List();
-listy.add("this", "that");
-listy.add("howdy", 445);
-window.document.writeln(listy.get("this"));
-window.document.writeln(listy.get("howdy"));
