@@ -14,16 +14,36 @@ var List = function () {
     this.h_list.length = MAX_ELEMENTS;
 };
 
+
+/**
+ * Entry consists of a key, value, and a link to the next entry.
+ */
+var Entry = function (k, v) {
+    this.key = k;
+    this.val = v;
+    this.next = null;
+};
+
+
 List.prototype = {
     
     
     /**
-     * get: returns the value attached to the given key.
+     * get: returns the value attached to the given key or undefined if it isn't found.
      */
     get: function(key) {
-        var h;
-        h = this.hash(key);
-        return this.h_list[h];
+        var h, nextentry;
+        h = this.mash(key);
+        
+        if (this.h_list[h] === undefined) 
+            return undefined;
+        nextentry = this.h_list[h];
+        for(;;) {
+            if (nextentry.key === key)
+                return nextentry.val;
+            nextentry = nextentry.next;
+        }
+        return undefined;
     },
     
     
@@ -31,16 +51,27 @@ List.prototype = {
      * add: inserts an object into the list, assigning it to the given key.
      */
     add: function (key, value) {
-        var h;
-        h = this.hash(key);
-        this.h_list[h] = value;
+        var h, entry, nextentry;
+        
+        entry = new Entry(key, value);
+        h = this.mash(key);
+
+        if (this.h_list[h] === undefined) {
+            this.h_list[h] = entry;
+        } else {
+            nextentry = this.h_list[h];
+            while (nextentry.next !== null) {
+                nextentry = nextentry.next;
+            }
+            nextentry.next = entry;
+        }
     },
      
     
     /**
-     * hash: hashes the given key and returns it.
+     * mash: hashes the given key and returns it.
      */
-    hash: function (key) {
+    mash: function (key) {
         var i, h;
         h = 0;
         
@@ -48,8 +79,8 @@ List.prototype = {
             h = (HASH_MULTIPLIER * h) + key.charCodeAt();
         return h % MAX_ELEMENTS;
     }  
-
 };
+
 
 
 
