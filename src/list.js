@@ -104,6 +104,8 @@ List.prototype = {
                 if (nextentry.key === key && preventry === undefined) {
                     this.h_list[h] = nextentry.next;
                     return;
+                } else if (nextentry.key === key) {
+                    preventry.next = nextentry.next;
                 }
                 // increment the entry placeholders
                 preventry = nextentry;
