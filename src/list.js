@@ -38,7 +38,7 @@ List.prototype = {
     Entry: function (k, v) {
         this.key = k;  
         this.val = v;
-        this.next = null;
+        this.next = undefined;
     },
     
     
@@ -54,7 +54,7 @@ List.prototype = {
             return undefined;
         nextentry = this.h_list[h];
         // iterate through the entries with the hash    
-        for(;;) {
+        while(nextentry !== undefined) {
             if (nextentry.key === key)
                 return nextentry.val;
             nextentry = nextentry.next;
@@ -78,10 +78,27 @@ List.prototype = {
         } else {
             nextentry = this.h_list[h];
             // iterate to the last item at that hash value in the list
-            while (nextentry.next !== null) {
+            while (nextentry.next !== undefined) {
                 nextentry = nextentry.next;
             }
             nextentry.next = entry;
+        }
+    },
+    
+    
+    /*
+     remove: removes an object from the list with the given key, returning false if no object
+     with the given key exists in the list.
+     */
+    remove: function (key) {
+        var h, nextentry;
+        h = this.mash(key);
+        // if the hash corresponds to nothing, return false
+        if (this.h_list[h] === undefined) {
+            return false;
+        } else {
+            nextentry = this.h_list[h];
+            // iterate through the entries with the hash
         }
     },
      
@@ -102,3 +119,8 @@ List.prototype = {
 };
 
 
+var listy = new List();
+listy.add("this", "that");
+listy.add("howdy", 445);
+window.document.writeln(listy.get("this"));
+window.document.writeln(listy.get("howdy"));
