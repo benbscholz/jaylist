@@ -1,6 +1,8 @@
 #jaylist is an simple and easy key-value list.
 
-###usage:
+Annotated source code: http://benbscholz.github.com/list.html
+
+###Usage:
 
 ####Create the list:
     var mylist = new List(); 
