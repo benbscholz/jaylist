@@ -66,8 +66,7 @@ List.prototype = {
     
     /*
      add: inserts an object into the list, assigning it to the given key.
-     It returns the value upon successful addition to the list. Otherwise,
-     it returns false.
+     It returns the value upon successful addition to the list.
      */
     add: function (key, value) {
         var h, entry, nextentry;
@@ -87,7 +86,6 @@ List.prototype = {
             nextentry.next = entry;
             return nextentry.next.val;
         }
-        return false;
     },
     
     
