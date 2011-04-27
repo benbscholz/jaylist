@@ -12,3 +12,6 @@ Annotated source code: http://benbscholz.github.com/list.html
     
 ####Get the value from the list:
     var val = mylist.get("key"); 
+    
+####Remove the value from the list:
+    mylist.remove("key");
