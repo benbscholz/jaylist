@@ -1,4 +1,4 @@
-#jaylist is an simple key-value list.
+#jaylist is a simple key-value list.
 
 Annotated source code: http://benbscholz.github.com/list.html
 
