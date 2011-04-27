@@ -3,7 +3,7 @@
  */
  
  
-var MAX_ELEMENTS = 100;     /* maximum elements for all lists */
+var MAX_ELEMENTS = 500;     /* maximum elements for all lists */
 var HASH_MULTIPLIER = 37;   /* prime multiplier for hash function */
 
 
@@ -34,16 +34,23 @@ List.prototype = {
      */
     get: function(key) {
         var h, nextentry;
+        
+        // hash the key
         h = this.mash(key);
         
+        // missing value
         if (this.h_list[h] === undefined) 
             return undefined;
+        
+        // iterate through the entries with the hash    
         nextentry = this.h_list[h];
         for(;;) {
             if (nextentry.key === key)
                 return nextentry.val;
             nextentry = nextentry.next;
         }
+        
+        // nothing found
         return undefined;
     },
     
@@ -54,13 +61,17 @@ List.prototype = {
     add: function (key, value) {
         var h, entry, nextentry;
         
+        // create new entry with the key and value, hash the key
         entry = new Entry(key, value);
         h = this.mash(key);
-
+        
+        // if the hash corresponds to nothing, add the entry
         if (this.h_list[h] === undefined) {
             this.h_list[h] = entry;
         } else {
             nextentry = this.h_list[h];
+            
+            // iterate to the last item at that hash value in the list
             while (nextentry.next !== null) {
                 nextentry = nextentry.next;
             }
