@@ -1,12 +1,13 @@
-/** 
+/*
  * list.js provides the functions to create a hashed key-value list.
  */
+ 
  
 var MAX_ELEMENTS = 100;     /* maximum elements for all lists */
 var HASH_MULTIPLIER = 37;   /* prime multiplier for hash function */
 
 
-/**
+/*
  * List allows to access elements through a key (string of characters)
  */
 var List = function () {
@@ -15,7 +16,7 @@ var List = function () {
 };
 
 
-/**
+/*
  * Entry consists of a key, value, and a link to the next entry.
  */
 var Entry = function (k, v) {
@@ -28,7 +29,7 @@ var Entry = function (k, v) {
 List.prototype = {
     
     
-    /**
+    /*
      * get: returns the value attached to the given key or undefined if it isn't found.
      */
     get: function(key) {
@@ -47,7 +48,7 @@ List.prototype = {
     },
     
     
-    /**
+    /*
      * add: inserts an object into the list, assigning it to the given key.
      */
     add: function (key, value) {
@@ -68,7 +69,7 @@ List.prototype = {
     },
      
     
-    /**
+    /*
      * mash: hashes the given key and returns it.
      */
     mash: function (key) {
