@@ -1,9 +1,12 @@
 jaylist
 =======
 
-#jaylist is a simple key-value list.
+#jaylist is an simple and easy key-value list.
 
 ##usage:
-    var mylist = new List(); // create the list
-    mylist.add("key", value); // add value to the list 
-    var val = mylist.get("key"); // get the value from the list
+###Create the list:
+    var mylist = new List(); 
+###Add a value to the list:
+    mylist.add("key", value); 
+###Get the value from the list:
+    var val = mylist.get("key"); 
