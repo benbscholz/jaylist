@@ -18,16 +18,6 @@ var HASH_MULTIPLIER = 37;
 
 
 /*
- Entry consists of a key, value, and a link to the next entry.
- */
-var Entry = function (k, v) {
-    this.key = k;
-    this.val = v;
-    this.next = null;
-};
-
-
-/*
  List allows to access elements through a key (string of characters)
  */
 var List = function () {
@@ -40,6 +30,16 @@ var List = function () {
  List functions to create and manipulate a hashed list.
 */
 List.prototype = {
+    
+    
+    /*
+     Entry consists of a key, value, and a link to the next entry.
+     */
+    Entry: function (k, v) {
+        this.key = k;  
+        this.val = v;
+        this.next = null;
+    },
     
     
     /*
@@ -70,7 +70,7 @@ List.prototype = {
     add: function (key, value) {
         var h, entry, nextentry;
         // create new entry with the key and value, hash the key
-        entry = new Entry(key, value);
+        entry = new this.Entry(key, value);
         h = this.mash(key);
         // if the hash corresponds to nothing, add the entry
         if (this.h_list[h] === undefined) {
@@ -100,3 +100,5 @@ List.prototype = {
     
      
 };
+
+
