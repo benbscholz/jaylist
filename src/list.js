@@ -54,8 +54,8 @@ List.prototype = {
         // if there is a missing value return undefined
         if (this.h_list[h] === undefined) 
             return undefined;
-        // iterate through the entries with the hash    
         nextentry = this.h_list[h];
+        // iterate through the entries with the hash    
         for(;;) {
             if (nextentry.key === key)
                 return nextentry.val;
