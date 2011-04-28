@@ -8,6 +8,7 @@ Annotated source code: http://benbscholz.github.com/list.html
     var mylist = new List(); 
     
 ####Add a value to the list:
+If add() is given a key that already exists in the list, the previous value will be overwritten.
     mylist.add("key", value); 
     
 ####Get the value from the list:
