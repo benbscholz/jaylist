@@ -81,6 +81,11 @@ List.prototype = {
             nextentry = this.h_list[h];
             // iterate to the last item at that hash value in the list
             while (nextentry.next !== undefined) {
+                if (nextentry.key === key) {
+                    // overwrite entry with the same key
+                    nextentry.val = value;
+                    return nextentry.val;   
+                }
                 nextentry = nextentry.next;
             }
             nextentry.next = entry;
