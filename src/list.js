@@ -100,30 +100,31 @@ List.prototype = {
     
     
     /*
-     remove: removes an object from the list with the given key. It returns
-     false if no object with the given key exists in the list. Otherwise, it
-     returns true upon successful removal.
-     */
+    remove: removes an object from the list with the given key. It returns
+    false if no object with the given key exists in the list. Otherwise, it
+    returns the value removed.
+    */
     remove: function (key) {
         var h, current, next;
         h = this.hash(key);
-        // if the hash corresponds to nothing, return false
-        if (this.h_list[h] === undefined) {
+        // if the hash doesn't correspong to anything
+        if (this.h_list[h] === undefined)
             return false;
-        } else {
+        else {
             next = this.h_list[h];
             // iterate through the entries with the hash
             while (next !== undefined) {
-                // if the key matches the first entry
-                // connect h_list to the next chain in the list
-                if (next.key === key && current === undefined) {
-                    this.h_list[h] = next.next;
-                    return true;
-                } else if (next.key === key) {
-                    current.next = next.next;
-                    return true;
-                }
-                // increment the entry placeholders
+                if (next.key === key)
+                    // if the key matches the first cell
+                    // connect h_list[h] to the next value
+                    if (current === undefined)
+                        this.h_list[h] = next.next;
+                    // remove by chaining previous entry to next entry
+                    else
+                        current.next = next.next;
+                    // the value removed
+                    return next.val;
+                // step forward in the chain
                 current = next;
                 next = next.next;
             }
