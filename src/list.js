@@ -100,26 +100,26 @@ List.prototype = {
      returns true upon successful removal.
      */
     remove: function (key) {
-        var h, currente, nexte;
+        var h, current, next;
         h = this.mash(key);
         // if the hash corresponds to nothing, return false
         if (this.h_list[h] === undefined) {
             return false;
         } else {
-            nexte = this.h_list[h];
+            next = this.h_list[h];
             // iterate through the entries with the hash
-            while (nexte !== undefined) {
+            while (next !== undefined) {
                 // if the key matches the first entry, connect h_list to the next chain in the list
-                if (nexte.key === key && currente === undefined) {
-                    this.h_list[h] = nexte.next;
+                if (next.key === key && current === undefined) {
+                    this.h_list[h] = next.next;
                     return true;
-                } else if (nexte.key === key) {
-                    currente.next = nexte.next;
+                } else if (next.key === key) {
+                    current.next = next.next;
                     return true;
                 }
                 // increment the entry placeholders
-                currente = nexte;
-                nexte = nexte.next;
+                current = next;
+                next = next.next;
             }
             // nothing found
             return false;
