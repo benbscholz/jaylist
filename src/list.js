@@ -117,13 +117,16 @@ List.prototype = {
                 if (next.key === key)
                     // if the key matches the first cell
                     // connect h_list[h] to the next value
-                    if (current === undefined)
+                    if (current === undefined) {}
                         this.h_list[h] = next.next;
+                        // the value removed
+                        return next.val;
                     // remove by chaining previous entry to next entry
-                    else
+                    } else {
                         current.next = next.next;
-                    // the value removed
-                    return next.val;
+                        // the value removed
+                        return next.val;
+                    }
                 // step forward in the chain
                 current = next;
                 next = next.next;
