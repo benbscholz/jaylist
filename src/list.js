@@ -17,10 +17,11 @@ var MAX_ELEMENTS = 500;
 var HASH_MULTIPLIER = 37;   
 
 
-/*
- List allows to access elements through a key (string of characters).
- It operates like a hash table: it is an associative array with the 
- values chained in a linked list to deal with hash collisions. 
+/**
+ * @constructor
+ * List allows to access elements through a key (string of characters).
+ * It operates like a hash table: it is an associative array with the 
+ * values chained in a linked list to deal with hash collisions. 
  */
 var List = function () {
     this.h_list = [];
@@ -28,14 +29,14 @@ var List = function () {
 };
 
 
-/*
- List functions to create and manipulate a hashed list.
-*/
+/**
+ * List functions to create and manipulate a hashed list.
+ */
 List.prototype = {
     
     
-    /*
-     Entry consists of a key, value, and a link to the next entry.
+    /**
+     * Entry consists of a key, value, and a link to the next entry.
      */
     Entry: function (k, v) {
         this.key = k;  
@@ -44,8 +45,8 @@ List.prototype = {
     },
     
     
-    /*
-     get: returns the value attached to the given key or undefined if it isn't found.
+    /**
+     * get: returns the value attached to the given key or undefined if it isn't found.
      */
     get: function(key) {
         var h, nextentry;
@@ -66,12 +67,12 @@ List.prototype = {
     },
     
     
-    /*
-     add: inserts an object into the list, assigning it to the given key.
-     It returns the value upon successful addition to the list. In the 
-     event of hash collisions, the entry is chained to end of the value
-     already in the hash's cell. If a value is inserted with a key that
-     exists in the list already, the old value is overwritten.
+    /**
+     * add: inserts an object into the list, assigning it to the given key.
+     * It returns the value upon successful addition to the list. In the 
+     * event of hash collisions, the entry is chained to end of the value
+     * already in the hash's cell. If a value is inserted with a key that
+     * exists in the list already, the old value is overwritten.
      */
     add: function (key, value) {
         var h, entry, nextentry;
@@ -99,11 +100,11 @@ List.prototype = {
     },
     
     
-    /*
-    remove: removes an object from the list with the given key. It returns
-    false if no object with the given key exists in the list. Otherwise, it
-    returns the value removed.
-    */
+    /**
+     * remove: removes an object from the list with the given key. It returns
+     * false if no object with the given key exists in the list. Otherwise, it
+     * returns the value removed.
+     */
     remove: function (key) {
         var h, current, next;
         h = this.hash(key);
@@ -137,8 +138,8 @@ List.prototype = {
     },
      
     
-    /*
-     hash: hashes the given key and returns it.
+    /**
+     * hash: hashes the given key and returns it.
      */
     hash: function (key) {
         var i, h;       
