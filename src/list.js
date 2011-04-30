@@ -117,7 +117,7 @@ List.prototype = {
                 if (next.key === key)
                     // if the key matches the first cell
                     // connect h_list[h] to the next value
-                    if (current === undefined) {}
+                    if (current === undefined) {
                         this.h_list[h] = next.next;
                         // the value removed
                         return next.val;
