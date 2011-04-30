@@ -4,8 +4,8 @@ Author: Ben Brooks Scholz (c) 2011
 list.js provides the functions to create a hashed key-value list.
 
 The global constant MAX_ELEMENTS determines the initialized list
-size. This value need only be changed if the set of values is known
-to be very small or very large. 
+size. This value should be changed based on the size of your data
+set. 
 
 This code is licensed under the GPLv3.
 
@@ -18,7 +18,9 @@ var HASH_MULTIPLIER = 37;
 
 
 /*
- List allows to access elements through a key (string of characters)
+ List allows to access elements through a key (string of characters).
+ It operates like a hash table: it is an associative array with the 
+ values chained in a linked list to deal with hash collisions. 
  */
 var List = function () {
     this.h_list = [];
@@ -48,7 +50,7 @@ List.prototype = {
     get: function(key) {
         var h, nextentry;
         // hash the key
-        h = this.mash(key);
+        h = this.hash(key);
         // if there is a missing value return undefined
         if (this.h_list[h] === undefined) 
             return undefined;
@@ -66,13 +68,16 @@ List.prototype = {
     
     /*
      add: inserts an object into the list, assigning it to the given key.
-     It returns the value upon successful addition to the list.
+     It returns the value upon successful addition to the list. In the 
+     event of hash collisions, the entry is chained to end of the value
+     already in the hash's cell. If a value is inserted with a key that
+     exists in the list already, the old value is overwritten.
      */
     add: function (key, value) {
         var h, entry, nextentry;
         // create new entry with the key and value, hash the key
         entry = new this.Entry(key, value);
-        h = this.mash(key);
+        h = this.hash(key);
         // if the hash corresponds to nothing, add the entry
         if (this.h_list[h] === undefined) {
             this.h_list[h] = entry;
@@ -101,7 +106,7 @@ List.prototype = {
      */
     remove: function (key) {
         var h, current, next;
-        h = this.mash(key);
+        h = this.hash(key);
         // if the hash corresponds to nothing, return false
         if (this.h_list[h] === undefined) {
             return false;
@@ -109,7 +114,8 @@ List.prototype = {
             next = this.h_list[h];
             // iterate through the entries with the hash
             while (next !== undefined) {
-                // if the key matches the first entry, connect h_list to the next chain in the list
+                // if the key matches the first entry
+                // connect h_list to the next chain in the list
                 if (next.key === key && current === undefined) {
                     this.h_list[h] = next.next;
                     return true;
@@ -128,16 +134,15 @@ List.prototype = {
      
     
     /*
-     mash: hashes the given key and returns it.
+     hash: hashes the given key and returns it.
      */
-    mash: function (key) {
-        var i, h;
-        h = 0;
-        
+    hash: function (key) {
+        var i, h;       
+        // iterate through the characters in the key string.
+        // compute the hash using the character codes and 
+        // hash multiplier prime constant.
         for (i = 0; i < key.length; i = i + 1)
             h = (HASH_MULTIPLIER * h) + key.charCodeAt();
         return h % MAX_ELEMENTS;
-    } 
-    
-     
+    }    
 };
