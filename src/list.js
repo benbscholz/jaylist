@@ -49,18 +49,18 @@ List.prototype = {
      * get: returns the value attached to the given key or undefined if it isn't found.
      */
     get: function(key) {
-        var h, nextentry;
+        var h, next;
         // hash the key
         h = this.hash(key);
         // if there is a missing value return undefined
         if (this.h_list[h] === undefined) 
             return undefined;
-        nextentry = this.h_list[h];
+        next = this.h_list[h];
         // iterate through the entries with the hash    
-        while(nextentry !== undefined) {
-            if (nextentry.key === key)
-                return nextentry.val;
-            nextentry = nextentry.next;
+        while(next !== undefined) {
+            if (next.key === key)
+                return next.val;
+            next = next.next;
         }
         // nothing found
         return undefined;
@@ -75,7 +75,7 @@ List.prototype = {
      * exists in the list already, the old value is overwritten.
      */
     add: function (key, value) {
-        var h, entry, nextentry;
+        var h, entry, next;
         // create new entry with the key and value, hash the key
         entry = new this.Entry(key, value);
         h = this.hash(key);
@@ -84,18 +84,20 @@ List.prototype = {
             this.h_list[h] = entry;
             return this.h_list[h].val;
         } else {
-            nextentry = this.h_list[h];
-            // iterate to the last item at that hash value in the list
-            while (nextentry.next !== undefined) {
-                if (nextentry.key === key) {
-                    // overwrite entry with the same key
-                    nextentry.val = value;
-                    return nextentry.val;   
+            next = this.h_list[h];
+            // iterate through the items in the list, overwriting any value with
+            // the input key. If the end of the list is reached and no matching 
+            // key is found, append the entry to the end of the chain.
+            while (next !== undefined) {
+                if (next.key === key) {
+                    next.val = value;
+                    return next.val;
+                } else if (next.next === undefined) {
+                    next.next = entry;
+                    return next.next.val;
                 }
-                nextentry = nextentry.next;
+                next = next.next;              
             }
-            nextentry.next = entry;
-            return nextentry.next.val;
         }
     },
     
@@ -139,15 +141,18 @@ List.prototype = {
      
     
     /**
-     * hash: hashes the given key and returns it.
+     * hash: Hashes the given key and returns it. The key should be
+     * a character string, as the character codes are used to compute
+     * the hash. Returns false if the key is not a string.
      */
     hash: function (key) {
         var i, h;       
+        h = 0;
         // iterate through the characters in the key string.
         // compute the hash using the character codes and 
         // hash multiplier prime constant.
         for (i = 0; i < key.length; i = i + 1)
-            h = (HASH_MULTIPLIER * h) + key.charCodeAt();
+            h = (HASH_MULTIPLIER * h) + key.charCodeAt(i);
         return h % MAX_ELEMENTS;
     }    
 };
