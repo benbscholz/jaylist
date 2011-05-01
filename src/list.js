@@ -156,4 +156,3 @@ window['List'] = List;
 List.prototype['get'] = List.prototype.get;
 List.prototype['add'] = List.prototype.add;
 List.prototype['remove'] = List.prototype.remove;
-List.prototype['hash'] = List.prototype.hash;
