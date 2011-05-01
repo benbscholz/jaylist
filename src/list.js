@@ -1,15 +1,14 @@
-/*
-Author: Ben Brooks Scholz (c) 2011
-
-list.js provides the functions to create a hashed key-value list.
-
-The global constant MAX_ELEMENTS determines the initialized list
-size. This value should be changed based on the size of your data
-set. 
-
-This code is licensed under the GPLv3.
-
-*/
+/**
+ * Author: Ben Brooks Scholz (c) 2011
+ *
+ * list.js provides the functions to create a hashed key-value list.
+ *
+ * This code is licensed under the GPLv3.
+ *
+ * The global constant MAX_ELEMENTS determines the initialized list
+ * size. This value should be changed based on the size of your data
+ * set. 
+ */
  
 // maximum elements for all lists 
 var MAX_ELEMENTS = 500; 
