@@ -3,11 +3,13 @@ var jaylist = new List();
 module("jaylist Module");
 
 test('Hash Functionality', function() {
+    expect(2);
     equals(typeof jaylist.hash("hello"), "number", 'Hash a string.');
     ok(!jaylist.hash(235), 'Cannot hash a non-string.');
 });
 
 test('Add items', function() {
+    expect(4);
     equals(jaylist.add("that", 1), 1, 'Added ("that", 1).');
     equals(jaylist.add("this", 4), 4, 'Added ("this", 4).');
     equals(jaylist.add("this", 7), 7, 'Overwrite ("this", 4) with ("this", 7).');
@@ -15,6 +17,7 @@ test('Add items', function() {
 });
 
 test('Get items', function() {
+    expect(4);
     equals(jaylist.get("that"), 1, 'Retrieved the value of "that" (1).');
     equals(jaylist.get("this"), 7, 'Retrieved the value of "this" (7).');
     equals(jaylist.get("other"), "things", 'Retrieved the value of "other" ("things").');
@@ -22,6 +25,7 @@ test('Get items', function() {
 });
 
 test('Remove items', function() {
+    expect(4);
     jaylist.remove("that");
     equals(jaylist.get("that"), undefined, 'Removed "that".');
     jaylist.remove("this");
