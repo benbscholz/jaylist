@@ -140,6 +140,19 @@ List.prototype = {
         }
         
         return values;
+    },
+    
+    
+    /**
+     * len: Returns the number of items in the list. Returns zero if empty.
+     */
+    len: function () {
+        var len, entry;
+        len = 0;
+        for (entry in this.table) 
+            len = len + 1;
+
+        return len;
     }
 };
 
@@ -150,3 +163,4 @@ List.prototype['add'] = List.prototype.add;
 List.prototype['remove'] = List.prototype.remove;
 List.prototype['keys'] = List.prototype.keys;
 List.prototype['values'] = List.prototype.values;
+List.prototype['len'] = List.prototype.len;
