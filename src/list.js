@@ -46,7 +46,9 @@ var List = function () {
  *  keys()          -- Returns an array of the keys in the list.
  *  values()        -- Returns an array of the values in the list
  *                     with each value appearing only once.
- * 
+ *  len()           -- Returns the number of elements in the list, 
+ *                     zero if empty.
+ *
  */
 List.prototype = {
 
