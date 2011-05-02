@@ -22,6 +22,9 @@ a simple wrapper for javascript's built-in hash storage.
 ####Get the values in the list:
     var values = jaylist.values();
     
+####Get the length of the list:
+    var len = jaylist.len();
+    
 ###jaylist Functions:
 ####add(key, value)
 --Insert an object into the list, overwriting any value already assigned to the key. Returns the value upon successful addition.
@@ -33,3 +36,5 @@ a simple wrapper for javascript's built-in hash storage.
 --Returns an array of the keys in the list.
 ####values()
 --Returns an array of the values in the list with each value appearing only once.
+####len()
+--Returns the number of elements in the list, 0 when empty.
