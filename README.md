@@ -32,7 +32,7 @@ a simple wrapper for javascript's built-in hash storage.
 ####add(key, value)
 --Insert an object into the list, overwriting any value already assigned to the key. Returns the value upon successful addition.
 ####get(key)
---Returns the vlaue associated with key, undefined if the key has not been entered into the list.
+--Returns the value associated with key, undefined if the key has not been entered into the list.
 ####remove(key)
 --Removes the object from the list. Returns false if no value is assigned to the key. Upon successful removal, it returns the value removed.
 ####keys()
