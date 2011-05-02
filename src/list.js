@@ -48,6 +48,8 @@ var List = function () {
  *                     with each value appearing only once.
  *  len()           -- Returns the number of elements in the list, 
  *                     zero if empty.
+ *  clear()         -- Removes the items from the list.
+ *
  *
  */
 List.prototype = {
@@ -152,9 +154,21 @@ List.prototype = {
         var len, entry;
         len = 0;
         for (entry in this.table) 
-            len = len + 1;
+            if (this.table.hasOwnProperty(entry))
+                len = len + 1;
 
         return len;
+    },
+    
+    
+    /**
+     * clear: Removes the items from the list.
+     */
+    clear: function () {
+        var i, keys;
+        keys = this.keys();
+        for (i = 0; i < keys.length; i = i + 1)
+            delete this.table[keys[i]];
     }
 };
 
@@ -166,3 +180,4 @@ List.prototype['remove'] = List.prototype.remove;
 List.prototype['keys'] = List.prototype.keys;
 List.prototype['values'] = List.prototype.values;
 List.prototype['len'] = List.prototype.len;
+List.prototype['clear'] = List.prototype.clear;
