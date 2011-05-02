@@ -1,6 +1,7 @@
-#jaylist
-##a simple wrapper for javascript's built-in hash storage
-##655 bytes
+jaylist
+=======
+a simple wrapper for javascript's built-in hash storage
+655 bytes
 
 ###Usage:
 
