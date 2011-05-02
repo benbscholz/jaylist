@@ -37,9 +37,15 @@ test('Mass retrieval', function() {
     equals(jaylist.values().toString(), "9", 'Retrieved values.');
 });
 
-test('Length Functions', function() {
+test('Length functions', function() {
     expect(2);
     equals(jaylist.len(), 2, 'Retrieved length.');
     var emptylist = new List();
     equals(emptylist.len(), 0, 'Retrieved empty list length.')
-})
+});
+
+test('Clear functions', function() {
+    expect(1);
+    jaylist.clear();
+    equals(jaylist.len(), 0, 'Cleared list.');
+});
