@@ -50,7 +50,12 @@
     
     jaylist.hasKey(key);
     
+
+#### Pop the key from the list:
+
+    jaylist.pop(key);
     
+        
 ### jaylist Functions:
 
 #### add(key, value)
@@ -84,4 +89,8 @@
 #### hasKey(key)
 
 -- Returns true if the list contains the key and false otherwise.
+
+#### pop(key, def)
+
+-- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value.
 
