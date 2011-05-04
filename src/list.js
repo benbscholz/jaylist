@@ -34,7 +34,9 @@ var List = function () {
 /**
  * List functions to create and manipulate a hashed list.
  *
- *  get(key)        -- Returns the value associated with key.
+ *  get(key)        -- Returns the value associated with key, 
+                       undefined if there is no values asso-
+                       ciated with the key.
  *  add(key, value) -- Insert an object into the list, over-
  *                     writing any value already assigned to the
  *                     key. Returns the value upon successful
@@ -49,6 +51,8 @@ var List = function () {
  *  len()           -- Returns the number of elements in the list, 
  *                     zero if empty.
  *  clear()         -- Removes the items from the list.
+ *  hasKey(key)     -- Returns true if the list contains the key and 
+ *                     false if it does not.
  *
  *
  */
@@ -169,6 +173,18 @@ List.prototype = {
         keys = this.keys();
         for (i = 0; i < keys.length; i = i + 1)
             delete this.table[keys[i]];
+    },
+    
+    
+    /**
+     * hasKey: Returns true if the list contains the given key and false if
+     * if does not.
+     */
+    hasKey: function(key) {
+        if (this.get(key) !== undefined)
+            return true;
+        else
+            return false;
     }
 };
 
@@ -181,3 +197,4 @@ List.prototype['keys'] = List.prototype.keys;
 List.prototype['values'] = List.prototype.values;
 List.prototype['len'] = List.prototype.len;
 List.prototype['clear'] = List.prototype.clear;
+List.prototype['hasKey'] = List.prototype.hasKey;
