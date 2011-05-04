@@ -10,6 +10,13 @@ test('Add items', function() {
     equals(jaylist.add("other", "things"), "things", 'Added ("other", "things").');
 });
 
+test('Contain functions', function() {
+    expect(3);
+    equals(jaylist.hasKey("that"), true, 'Has key "that".');
+    equals(jaylist.hasKey("this"), true, 'Has key "this".');
+    equals(jaylist.hasKey("Missing"), false, 'Does not have key "Missing".');
+});
+
 test('Get items', function() {
     expect(4);
     equals(jaylist.get("that"), 1, 'Retrieved the value of "that" (1).');
