@@ -2,6 +2,8 @@
 
 ## a simple wrapper for javascript's built-in hash storage. 
 
+### Much of the functionality was inspired by Python's dictionary.
+
 ### Usage:
 
 #### Create the list:
@@ -44,6 +46,11 @@
     jaylist.clear();
     
     
+#### Check if the list contains the key:
+    
+    jaylist.hasKey(key);
+    
+    
 ### jaylist Functions:
 
 #### add(key, value)
@@ -73,4 +80,8 @@
 #### clear()
 
 --Removes all the items from the list.
+
+#### hasKey(key)
+
+-- Returns true if the list contains the key and false otherwise.
 
