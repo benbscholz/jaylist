@@ -34,27 +34,28 @@ var List = function () {
 /**
  * List functions to create and manipulate a hashed list.
  *
- *  get(key)        -- Returns the value associated with key, 
-                       undefined if there is no values asso-
-                       ciated with the key.
- *  add(key, value) -- Insert an object into the list, over-
- *                     writing any value already assigned to the
- *                     key. Returns the value upon successful
- *                     addition.
- *  remove(key)     -- Removes the object from the list. Returns
- *                     false if no value is assigned to the key. 
- *                     Upon successful removal, it returns the value
- *                     removed.
- *  keys()          -- Returns an array of the keys in the list.
- *  values()        -- Returns an array of the values in the list
- *                     with each value appearing only once.
- *  len()           -- Returns the number of elements in the list, 
- *                     zero if empty.
- *  clear()         -- Removes the items from the list.
- *  hasKey(key)     -- Returns true if the list contains the key and 
- *                     false if it does not.
- *
- *
+ *  get(key)          -- Returns the value associated with key, 
+                         undefined if there is no values asso-
+                         ciated with the key.
+ *  add(key, value)   -- Insert an object into the list, over-
+ *                       writing any value already assigned to the
+ *                       key. Returns the value upon successful
+ *                       addition.
+ *  remove(key)       -- Removes the object from the list. Returns
+ *                       false if no value is assigned to the key. 
+ *                       Upon successful removal, it returns the value
+ *                       removed.
+ *  keys()            -- Returns an array of the keys in the list.
+ *  values()          -- Returns an array of the values in the list
+ *                       with each value appearing only once.
+ *  len()             -- Returns the number of elements in the list, 
+ *                       zero if empty.
+ *  clear()           -- Removes the items from the list.
+ *  hasKey(key)       -- Returns true if the list contains the key and 
+ *                       false if it does not.
+ *  pop(key, default) -- Returns the value associated with the key and
+ *                       removes it. If the value doesn't exist return
+ *                       default.
  */
 List.prototype = {
 
@@ -185,6 +186,18 @@ List.prototype = {
             return true;
         else
             return false;
+    },
+    
+    
+    /**
+     * pop: Returns the value associated with the key and removes it. If there
+     * is no value associated with the key, return default.
+     */
+    pop: function (key, def) {
+        if (this.hasKey(key)) 
+            return this.remove(key);
+        else
+            return def; 
     }
 };
 
@@ -198,3 +211,4 @@ List.prototype['values'] = List.prototype.values;
 List.prototype['len'] = List.prototype.len;
 List.prototype['clear'] = List.prototype.clear;
 List.prototype['hasKey'] = List.prototype.hasKey;
+List.prototype['pop'] = List.prototype.pop;
