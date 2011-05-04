@@ -36,6 +36,13 @@ test('Remove items', function() {
     equals(jaylist.remove("Missing"), false, 'Cannot remove value not in the list.');
 });
 
+test('Pop function', function () {
+    expect(1);
+    jaylist.add("popped", 4);
+    jaylist.pop("popped");
+    ok(!jaylist.hasKey("popped"), 'Popped key.');
+});
+
 test('Mass retrieval', function() {
     expect(2);
     jaylist.add("howdy", 9);
