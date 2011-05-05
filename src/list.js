@@ -35,8 +35,8 @@ var List = function () {
  * List functions to create and manipulate a hashed list.
  *
  *  get(key)          -- Returns the value associated with key, 
-                         undefined if there is no values asso-
-                         ciated with the key.
+ *                       undefined if there is no values asso-
+ *                       ciated with the key.
  *  add(key, value)   -- Insert an object into the list, over-
  *                       writing any value already assigned to the
  *                       key. Returns the value upon successful
@@ -55,7 +55,8 @@ var List = function () {
  *                       false if it does not.
  *  pop(key, default) -- Returns the value associated with the key and
  *                       removes it. If the value doesn't exist return
- *                       default.
+ *                       default. Default is an optional argument that 
+ *                       is set to undefined.
  */
 List.prototype = {
 
@@ -191,9 +192,11 @@ List.prototype = {
     
     /**
      * pop: Returns the value associated with the key and removes it. If there
-     * is no value associated with the key, return default.
+     * is no value associated with the key, return default. Default is optional.
      */
     pop: function (key, def) {
+        if (def === null)
+            def = undefined;
         if (this.hasKey(key)) 
             return this.remove(key);
         else
