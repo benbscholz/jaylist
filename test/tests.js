@@ -37,10 +37,12 @@ test('Remove items', function() {
 });
 
 test('Pop function', function () {
-    expect(1);
+    expect(3);
     jaylist.add("popped", 4);
     jaylist.pop("popped");
     ok(!jaylist.hasKey("popped"), 'Popped key.');
+    equals(jaylist.pop("Missing", 80), 80, 'Popping missing key returns default.');
+    equals(jaylist.pop("Missing"), undefined, 'Popping missing key returns undefined.');
 });
 
 test('Mass retrieval', function() {
