@@ -92,5 +92,5 @@
 
 #### pop(key, def)
 
--- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value.
+-- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value. Default is an optional argument that is set to undefined.
 
