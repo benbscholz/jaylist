@@ -183,10 +183,7 @@ List.prototype = {
      * if does not.
      */
     hasKey: function(key) {
-        if (this.get(key) !== undefined)
-            return true;
-        else
-            return false;
+        return (this.get(key) !== undefined);
     },
     
     
@@ -210,7 +207,7 @@ List.prototype = {
         var keys, pair;
         keys = this.keys();
         // pop a random key from the key list and push it to the pair
-        pair = [keys[Math.floor(Math.random() * keys.length)]]
+        pair = [keys[Math.floor(Math.random() * keys.length)]];
         // push the value to the pair and remove it
         pair.push(this.remove(pair[0]));
         return pair;
