@@ -45,8 +45,18 @@ test('Pop function', function () {
     equals(jaylist.pop("Missing"), undefined, 'Popping missing key returns undefined.');
 });
 
+test('popItem function', function () {
+    expect(2);
+    jaylist.clear();
+    jaylist.add("popper", 1832);
+    var popped = jaylist.popItem();
+    equals(popped[0], "popper", 'Popped a random item.');
+    ok(!jaylist.hasKey("popper"), 'Removed it from the list.');
+});
+
 test('Mass retrieval', function() {
     expect(2);
+    jaylist.clear();
     jaylist.add("howdy", 9);
     jaylist.add("amazing", 9);
     equals(jaylist.keys().toString(), "howdy,amazing", 'Retrieved keys.');
