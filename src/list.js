@@ -57,6 +57,10 @@ var List = function () {
  *                       removes it. If the value doesn't exist return
  *                       default. Default is an optional argument that 
  *                       is set to undefined.
+ *  popItem()         -- Returns a random key value pair ( [key, value] )
+ *                       and removes it. Like it's python counterpart,
+ *                       you can use it to destructively iterate over               
+ *                       the list.
  */
 List.prototype = {
 
@@ -196,6 +200,20 @@ List.prototype = {
             return this.remove(key);
         else
             return def; 
+    },
+    
+    
+    /**
+     * popItem: Returns a random key value pair ( [key, value] ) and removes it.
+     */
+    popItem: function () {
+        var keys, pair;
+        keys = this.keys();
+        // pop a random key from the key list and push it to the pair
+        pair = [keys[Math.floor(Math.random() * keys.length)]]
+        // push the value to the pair and remove it
+        pair.push(this.remove(pair[0]));
+        return pair;
     }
 };
 
