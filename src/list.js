@@ -77,8 +77,7 @@ List.prototype = {
      * is overwritten.
      */
     add: function (key, value) {     
-        this.table[key] = value;
-        return this.table[key];
+        return (this.table[key] = value);
     },
     
     /**
@@ -105,16 +104,15 @@ List.prototype = {
      * keys: Returns an array of the keys in the List.
      */
     keys: function () {
-        var key, keys, table;
+        var key, keys;
         
         keys = [];
-        table = this.table;
         
         // iterate throught the hash pairs in the table, pushing each key
         // to the keys array.
-        for (key in table)
+        for (key in this.table)
             // filter inherited properties w/ for...in construct
-            if (table.hasOwnProperty(key))
+            if (this.table.hasOwnProperty(key))
                 keys.push(key);
         
         return keys;
