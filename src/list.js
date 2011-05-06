@@ -194,8 +194,6 @@ List.prototype = {
      * is no value associated with the key, return default. Default is optional.
      */
     pop: function (key, def) {
-        if (def === null)
-            def = undefined;
         if (this.hasKey(key)) 
             return this.remove(key);
         else
