@@ -193,10 +193,7 @@ List.prototype = {
      * def is optional.
      */
     pop: function (key, def) {
-        if (this.hasKey(key)) 
-            return this.remove(key);
-        else
-            return def; 
+        return (this.hasKey(key)) ? this.remove(key) : def;
     },
     
     
