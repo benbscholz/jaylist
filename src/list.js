@@ -199,14 +199,3 @@ List.prototype = {
     }
 };
 
-// functions available to the user
-window['List'] = List;
-List.prototype['get'] = List.prototype.get;
-List.prototype['add'] = List.prototype.add;
-List.prototype['remove'] = List.prototype.remove;
-List.prototype['keys'] = List.prototype.keys;
-List.prototype['values'] = List.prototype.values;
-List.prototype['len'] = List.prototype.len;
-List.prototype['clear'] = List.prototype.clear;
-List.prototype['hasKey'] = List.prototype.hasKey;
-List.prototype['pop'] = List.prototype.pop;
