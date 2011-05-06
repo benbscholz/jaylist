@@ -112,11 +112,10 @@ List.prototype = {
         
         // iterate throught the hash pairs in the table, pushing each key
         // to the keys array.
-        for (key in table) {
+        for (key in table)
             // filter inherited properties w/ for...in construct
             if (table.hasOwnProperty(key))
                 keys.push(key);
-        }
         
         return keys;
     },
