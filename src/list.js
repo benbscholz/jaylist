@@ -132,13 +132,12 @@ List.prototype = {
         // iterate through the keys in the list
         for (i = 0; i < keys.length; i = i + 1) {
             // contains is false if the value does not already appear in the
-            // values array and true if it is found.
+            // values array and true if it is found. when contains is true,
+            // break out of the loop.
             contains = false;
-            for (j = 0; j < values.length; j = j + 1) {
-                if (this.get(keys[i]) === values[j]) {
+            for (j = 0; j < values.length && !contains; j = j + 1) {
+                if (this.get(keys[i]) === values[j])
                     contains = true;
-                    break;
-                }
             }
             
             // if the value is not already in the values array, push the value
@@ -189,7 +188,8 @@ List.prototype = {
     
     /**
      * pop: Returns the value associated with the key and removes it. If there
-     * is no value associated with the key, return default. Default is optional.
+     * is no value associated with the key, return undefined, & for that reason
+     * def is optional.
      */
     pop: function (key, def) {
         if (this.hasKey(key)) 
