@@ -55,6 +55,10 @@
 
     jaylist.pop(key);
     
+#### Pop an item from the list:
+
+    jaylist.popItem();
+    
         
 ### jaylist Functions:
 
@@ -94,3 +98,6 @@
 
 -- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value. Default is an optional argument that is set to undefined.
 
+#### popItem()
+
+-- Returns a random key-value pair ( [key,value] ) and removes it from the list.
