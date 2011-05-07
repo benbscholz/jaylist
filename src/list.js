@@ -1,6 +1,6 @@
 /**
- * jaylist v2
  * jaylist is a wrapper for javascript's built-in hash storage system.
+ * It provides functions to manipulate the list.
  *
  * Copyright (C) 2011 by Ben Brooks Scholz
  *
