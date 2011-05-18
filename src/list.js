@@ -81,7 +81,7 @@ List.prototype = {
      * is overwritten.
      */
     add: function (key, value) {     
-        return (this.table[key] = value);
+        return this.table[key] = value;
     },
     
     /**
@@ -159,6 +159,8 @@ List.prototype = {
     len: function () {
         var len, entry;
         len = 0;
+        
+	    // count the entries in the table
         for (entry in this.table) 
             if (this.table.hasOwnProperty(entry))
                 len = len + 1;
@@ -183,7 +185,7 @@ List.prototype = {
      * if does not.
      */
     hasKey: function(key) {
-        return (this.get(key) !== undefined);
+        return this.get(key) !== undefined;
     },
     
     
