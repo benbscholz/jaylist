@@ -109,12 +109,12 @@ List.prototype = {
      */
     keys: function () {
         var key, keys;
-        
         keys = [];
         
         // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
         for (key in this.table)
+        
             // filter inherited properties w/ for...in construct
             if (this.table.hasOwnProperty(key))
                 keys.push(key);
@@ -134,6 +134,7 @@ List.prototype = {
         // iterate through the keys in the list
         for (key in this.table) {
             if (this.table.hasOwnProperty(key)) {
+            
                 // contains is false if the value does not already 
                 // appear in the values array and true if it is 
                 // found. when contains is true, break out of the loop.
@@ -204,12 +205,27 @@ List.prototype = {
     popItem: function () {
         var keys, pair;
         keys = this.keys();
+        
         // pop a random key from the key list and push it to the pair
         pair = [keys[Math.floor(Math.random() * keys.length)]];
+        
         // push the value to the pair and remove it
         pair.push(this.remove(pair[0]));
         
         return pair;
-    }
+    },
+    
+    
+    /**
+     * update: Adds all the entries from the input list to the list.
+     */
+    update: function (list) {
+        var key;
+        
+        // iterate through the input list, push the entries to the list
+        for (key in list.table)
+            if (list.table.hasOwnProperty(key))
+                this.add(key, list.table[key]);
+    }   
 };
 
