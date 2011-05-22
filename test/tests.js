@@ -75,3 +75,13 @@ test('Clear functions', function() {
     jaylist.clear();
     equals(jaylist.len(), 0, 'Cleared list.');
 });
+
+test('Update function', function() {
+    expect(1);
+    other_list = new List();
+    other_list.add("hello", 1);
+    other_list.add("howdy", 2);
+    jaylist.add("original", 3);
+    jaylist.update(other_list);
+    equals(jaylist.keys().toString(), "original,hello,howdy", 'Updated list with List.');
+});
