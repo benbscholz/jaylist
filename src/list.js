@@ -162,7 +162,8 @@ List.prototype = {
      */
     len: function () {
         var entry, len = 0;
-	    // count the entries in the table
+        
+        // count the entries in the table
         for (entry in this.table) 
             if (this.table.hasOwnProperty(entry))
                 len = len + 1;
