@@ -112,7 +112,7 @@ List.prototype = {
         
         keys = [];
         
-        // iterate throught the hash pairs in the table, pushing each key
+        // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
         for (key in this.table)
             // filter inherited properties w/ for...in construct
@@ -128,25 +128,26 @@ List.prototype = {
      * are only displayed once.
      */
     values: function () {
-        var i, j, contains, keys, values;
-        
+        var i, key, values, contains;
         values = [];
-        keys = this.keys();
         
         // iterate through the keys in the list
-        for (i = 0; i < keys.length; i = i + 1) {
-            // contains is false if the value does not already appear in the
-            // values array and true if it is found. when contains is true,
-            // break out of the loop.
-            contains = false;
-            for (j = 0; j < values.length && !contains; j = j + 1) {
-                if (this.get(keys[i]) === values[j])
-                    contains = true;
+        for (key in this.table) {
+            if (this.table.hasOwnProperty(key)) {
+                // contains is false if the value does not already 
+                // appear in the values array and true if it is 
+                // found. when contains is true, break out of the loop.
+                contains = false;
+                for (i = 0; i < values.length && !contains; i = i + 1) {
+                    if (this.get(key) === values[i])
+                        contains = true;
+                }
+                
+                // if the value is not already in the values array, 
+                // push the value
+                if (!contains)
+                    values.push(this.get(key));
             }
-            
-            // if the value is not already in the values array, push the value
-            if (!contains)
-                values.push(this.get(keys[i]));
         }
         
         return values;
