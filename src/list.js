@@ -34,13 +34,12 @@ var List = function () {
 /**
  * List functions to create and manipulate a hashed list.
  *
- *  get(key)          -- Returns the value associated with key, 
- *                       undefined if there is no values asso-
- *                       ciated with the key.
- *  add(key, value)   -- Insert an object into the list, over-
- *                       writing any value already assigned to the
- *                       key. Returns the value upon successful
- *                       addition.
+ *  get(key)          -- Returns the value associated with key, un-
+ *                       defined if there is no values associated
+ *                       with the key.
+ *  add(key, value)   -- Insert an object into the list, overwriting
+ *                       any value already assigned to the key. Returns
+ *                       the value upon successful addition.
  *  remove(key)       -- Removes the object from the list. Returns
  *                       false if no value is assigned to the key. 
  *                       Upon successful removal, it returns the value
@@ -61,6 +60,9 @@ var List = function () {
  *                       and removes it. Like it's python counterpart,
  *                       you can use it to destructively iterate over               
  *                       the list.
+ *  update(list)      -- Updates the list with the entries of the input
+ *                       list.
+ *
  */
 List.prototype = {
 
