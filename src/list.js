@@ -158,9 +158,7 @@ List.prototype = {
      * len: Returns the number of items in the list. Returns zero if empty.
      */
     len: function () {
-        var len, entry;
-        len = 0;
-        
+        var entry, len = 0;
 	    // count the entries in the table
         for (entry in this.table) 
             if (this.table.hasOwnProperty(entry))
@@ -174,10 +172,10 @@ List.prototype = {
      * clear: Removes the items from the list.
      */
     clear: function () {
-        var i, keys;
-        keys = this.keys();
-        for (i = 0; i < keys.length; i = i + 1)
-            delete this.table[keys[i]];
+        var key;
+        for (key in this.table)
+            if (this.table.hasOwnProperty(key))
+                delete this.table[key]
     },
     
     
