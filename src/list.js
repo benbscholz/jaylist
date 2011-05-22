@@ -208,6 +208,7 @@ List.prototype = {
         pair = [keys[Math.floor(Math.random() * keys.length)]];
         // push the value to the pair and remove it
         pair.push(this.remove(pair[0]));
+        
         return pair;
     }
 };
