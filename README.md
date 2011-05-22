@@ -59,6 +59,10 @@
 
     jaylist.popItem();
     
+#### Update a list with another list:
+    
+    jaylist.update(somelist);
+    
         
 ### jaylist Functions:
 
@@ -101,3 +105,7 @@
 #### popItem()
 
 -- Returns a random key-value pair ( [key,value] ) and removes it from the list.
+
+#### update(list)
+
+-- Adds the entries of the input list to the list.
