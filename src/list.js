@@ -237,7 +237,7 @@ List.prototype = {
         for (key in this.table)
             copy.add(key, this.table[key]);
 		
-		return copy;
+        return copy;
     }
 	
 };
