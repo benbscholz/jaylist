@@ -62,7 +62,7 @@ var List = function () {
  *                       the list.
  *  update(list)      -- Updates the list with the entries of the input
  *                       list.
- *  copy()            -- Returns a shallow copy of the list.
+ *  copy()            -- Returns a deep copy of the list.
  *
  *
  */
@@ -227,16 +227,35 @@ List.prototype = {
 
 
     /**
-     * copy: Returns a shallow copy of the list.
+     * copy: Returns a deep copy of the list.
      */
     copy: function () {
-        var copy, key, entry;
-        copy = new List();
+        // recursive function for deep copying a list
+		var deepCopy = function (obj) {
+		    var copied, entry; 
+		    copied = {};
+		    
+		    if (typeof(obj) === 'object') {
+		        if (typeof(obj.length) === 'number')
+		            copied = [];
+		        for (entry in obj) {
+		            if (obj.hasOwnProperty(entry)) {
+		                if (typeof(obj[entry]) === 'object')
+		                    copied[entry] = deepCopy(obj[entry]);
+		                else if (typeof(obj[entry]) === 'string' || 'number')
+		                    copied[entry] = obj[entry];
+		                else if (typeof(obj[entry]) === 'boolean')
+		                    copied[entry] = (typeof(obj[entry])) ? true : false;
+		            }
+		        }
+		    }
+		    return copied;
+		};
 		
-        // iterate through the entries in the list
-        for (key in this.table)
-            copy.add(key, this.table[key]);
-		
+		var copy;
+		copy = new List();
+		copy.update(deepCopy(this));
+        
         return copy;
     }
 	
