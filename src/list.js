@@ -227,8 +227,8 @@ List.prototype = {
 
 
     /**
-	 * copy: Returns a shallow copy of the list.
-	 */
+     * copy: Returns a shallow copy of the list.
+     */
     copy: function () {
         var copy, key, entry;
         copy = new List();
