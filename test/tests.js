@@ -89,11 +89,11 @@ test('Update function', function() {
 test('Copy function', function() {
 	expect(2);
 	var some_list = new List();
-	some_list.add("original", 3);
+	some_list.add("original", true);
 	some_list.add("hello", 1);
 	some_list.add("howdy", 2);
 	var copy_list = some_list.copy();
 	some_list.clear();
 	equals(copy_list.keys().toString(), "original,hello,howdy", "Copied the keys.");
-	equals(copy_list.values().toString(), "3,1,2", "Copied the values.")
+	equals(copy_list.values().toString(), "true,1,2", "Copied the values.")
 });
