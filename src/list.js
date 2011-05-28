@@ -233,8 +233,8 @@ List.prototype = {
 		var copy, key, entry;
 		copy = new List();
 		
-		// iterate through the entries in the list
-		for (key in this.table)
+        // iterate through the entries in the list
+        for (key in this.table)
             copy.add(key, this.table[key]);
 		
 		return copy;
