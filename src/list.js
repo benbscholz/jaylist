@@ -62,6 +62,8 @@ var List = function () {
  *                       the list.
  *  update(list)      -- Updates the list with the entries of the input
  *                       list.
+ *  copy()            -- Returns a shallow copy of the list.
+ *
  *
  */
 List.prototype = {
@@ -172,7 +174,7 @@ List.prototype = {
     clear: function () {
         var key;
         for (key in this.table)
-            delete this.table[key]
+            delete this.table[key];
     },
     
     
@@ -221,6 +223,22 @@ List.prototype = {
         // iterate through the input list, push the entries to the list
         for (key in list.table)
         	this.add(key, list.table[key]);
-    }   
+    },
+
+
+    /**
+	 * copy: Returns a shallow copy of the list.
+	 */
+    copy: function () {
+		var copy, key, entry;
+		copy = new List();
+		
+		// iterate through the entries in the list
+		for (key in this.table)
+            copy.add(key, this.table[key]);
+		
+		return copy;
+    }
+	
 };
 
