@@ -63,7 +63,10 @@
     
     jaylist.update(somelist);
     
-        
+    
+#### Shallow copy a list:
+
+    var newlist = jaylist.copy();
 ### jaylist Functions:
 
 #### add(key, value)
@@ -109,3 +112,7 @@
 #### update(list)
 
 -- Adds the entries of the input list to the list.
+
+#### copy()
+
+-- Returns a shallow copy of the list.
