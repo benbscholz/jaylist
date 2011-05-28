@@ -78,10 +78,21 @@ test('Clear functions', function() {
 
 test('Update function', function() {
     expect(1);
-    other_list = new List();
+    var other_list = new List();
     other_list.add("hello", 1);
     other_list.add("howdy", 2);
     jaylist.add("original", 3);
     jaylist.update(other_list);
     equals(jaylist.keys().toString(), "original,hello,howdy", 'Updated list with List.');
+});
+
+test('Copy function', function() {
+	expect(2);
+	var some_list = new List();
+	some_list.add("original", 3);
+	some_list.add("hello", 1);
+	some_list.add("howdy", 2);
+	var copy_list = some_list.copy();
+	equals(copy_list.keys().toString(), "original,hello,howdy", "Copied the keys.");
+	equals(copy_list.values().toString(), "3,1,2", "Copied the values.")
 });
