@@ -230,8 +230,8 @@ List.prototype = {
 	 * copy: Returns a shallow copy of the list.
 	 */
     copy: function () {
-		var copy, key, entry;
-		copy = new List();
+        var copy, key, entry;
+        copy = new List();
 		
         // iterate through the entries in the list
         for (key in this.table)
