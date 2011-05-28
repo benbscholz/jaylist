@@ -222,7 +222,7 @@ List.prototype = {
         
         // iterate through the input list, push the entries to the list
         for (key in list.table)
-        	this.add(key, list.table[key]);
+            this.add(key, list.table[key]);
     },
 
 
