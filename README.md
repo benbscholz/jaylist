@@ -64,7 +64,7 @@
     jaylist.update(somelist);
     
     
-#### Shallow copy a list:
+#### Deep copy a list:
 
     var newlist = jaylist.copy();
 ### jaylist Functions:
@@ -115,4 +115,4 @@
 
 #### copy()
 
--- Returns a shallow copy of the list.
+-- Returns a deep copy of the list.
