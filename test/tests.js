@@ -55,12 +55,13 @@ test('popItem function', function () {
 });
 
 test('Mass retrieval', function() {
-    expect(2);
+    expect(3);
     jaylist.clear();
     jaylist.add("howdy", 9);
     jaylist.add("amazing", 9);
     equals(jaylist.keys().toString(), "howdy,amazing", 'Retrieved keys.');
     equals(jaylist.values().toString(), "9", 'Retrieved values.');
+    equals(jaylist.items().toString(), 'howdy,9,amazing,9', 'Retrieved items.');
 });
 
 test('Length functions', function() {
