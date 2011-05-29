@@ -139,10 +139,9 @@ List.prototype = {
             // appear in the values array and true if it is 
             // found. when contains is true, break out of the loop.
             contains = false;
-            for (i = 0; i < values.length && !contains; i = i + 1) {
+            for (i = 0; i < values.length && !contains; i = i + 1) 
                 if (this.get(key) === values[i])
                     contains = true;
-            }
                 
             // if the value is not already in the values array, 
             // push the value
