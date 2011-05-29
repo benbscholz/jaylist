@@ -135,11 +135,14 @@ List.prototype = {
         // iterate through the keys in the list
         for (key in this.table) {
             if (this.table.hasOwnProperty(key)) {
+                
+                // decrement the value for the length of values.
                 // contains is false if the value does not already 
                 // appear in the values array and true if it is 
                 // found. when contains is true, break out of the loop.
                 contains = false;
-                for (i = 0; i < values.length && !contains; i = i + 1) 
+                i = values.length;
+                while (i-- && !contains) 
                     if (this.get(key) === values[i])
                         contains = true;
                 
