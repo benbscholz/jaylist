@@ -59,31 +59,31 @@ Deep copy a list:
 
     var newlist = jaylist.copy();
 
-### jaylist Functions:
+## jaylist Functions:
 
-#### add(key, value)
+### add(key, value)
 --Insert an object into the list, overwriting any value already assigned to the key. Returns the value upon successful addition.
-#### get(key)
+### get(key)
 --Returns the value associated with key, undefined if the key has not been entered into the list.
-#### remove(key)
+### remove(key)
 --Removes the object from the list. Returns false if no value is assigned to the key. Upon successful removal, it returns the value removed.
-#### keys()
+### keys()
 --Returns an array of the keys in the list.
-#### values()
+### values()
 --Returns an array of the values in the list with each value appearing only once.
-####items()
+### items()
 --Returns an array of key-value pairs. [[key, value]]
-#### len() 
+### len() 
 --Returns the number of elements in the list, 0 when empty.
-#### clear()
+### clear()
 --Removes all the items from the list.
-#### hasKey(key)
+### hasKey(key)
 -- Returns true if the list contains the key and false otherwise.
-#### pop(key, def)
+### pop(key, def)
 -- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value. Default is an optional argument that is set to undefined.
-#### popItem()
+### popItem()
 -- Returns a random key-value pair ( [key,value] ) and removes it from the list.
-#### update(list)
+### update(list)
 -- Adds the entries of the input list to the list.
-#### copy()
+### copy()
 -- Returns a deep copy of the list.
