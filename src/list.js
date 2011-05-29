@@ -252,9 +252,9 @@ List.prototype = {
             return copied;
         };
 		
-		var copy;
-		copy = new List();
-		copy.update(deepCopy(this));
+        var copy;
+        copy = new List();
+        copy.update(deepCopy(this));
         
         return copy;
     }
