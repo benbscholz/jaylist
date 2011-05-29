@@ -47,6 +47,7 @@ var List = function () {
  *  keys()            -- Returns an array of the keys in the list.
  *  values()          -- Returns an array of the values in the list
  *                       with each value appearing only once.
+ *  items()           -- Returns an array of key value pairs.
  *  len()             -- Returns the number of elements in the list, 
  *                       zero if empty.
  *  clear()           -- Removes the items from the list.
@@ -148,6 +149,23 @@ List.prototype = {
         }
         
         return values;
+    },
+    
+    
+    /**
+     * items: Returns an array of key-value pairs: [[key, value]]
+     */
+    items: function () {
+        var key, pair, itemlist = [];
+        
+        for (key in this.table) {
+            pair = [];
+            pair.push(key);
+            pair.push(this.table[key]);
+            itemlist.push(pair);
+        }
+        
+        return itemlist;
     },
     
     
