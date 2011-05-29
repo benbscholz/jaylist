@@ -35,7 +35,12 @@
 
     var values = jaylist.values();
     
-     
+    
+#### Get the items in the list:
+
+    var items = jaylist.items();
+    
+    
 #### Get the length of the list:
 
     var len = jaylist.len();
@@ -88,6 +93,10 @@
 #### values()
 
 --Returns an array of the values in the list with each value appearing only once.
+
+####items()
+
+--Returns an array of key-value pairs. [[key, value]]
 
 #### len() 
 
