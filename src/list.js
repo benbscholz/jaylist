@@ -85,7 +85,7 @@ List.prototype = {
      * is overwritten.
      */
     add: function (key, value) {     
-        return this.table[key] = value;
+        return (this.table[key] = value);
     },
     
     /**
@@ -112,8 +112,7 @@ List.prototype = {
      * keys: Returns an array of the keys in the List.
      */
     keys: function () {
-        var key, keys;
-        keys = [];
+        var key, keys = [];
         
         // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
@@ -129,8 +128,7 @@ List.prototype = {
      * are only displayed once.
      */
     values: function () {
-        var i, key, values, contains;
-        values = [];
+        var i, key, contains, values = [];
         
         // iterate through the keys in the list
         for (key in this.table) {
@@ -182,7 +180,7 @@ List.prototype = {
      * if does not.
      */
     hasKey: function(key) {
-        return this.get(key) !== undefined;
+        return (this.get(key) !== undefined);
     },
     
     
@@ -200,8 +198,7 @@ List.prototype = {
      * popItem: Returns a random key value pair ( [key, value] ) and removes it.
      */
     popItem: function () {
-        var keys, pair;
-        keys = this.keys();
+        var pair, keys = this.keys();
         
         // pop a random key from the key list and push it to the pair
         pair = [keys[Math.floor(Math.random() * keys.length)]];
@@ -231,8 +228,7 @@ List.prototype = {
     copy: function () {
         // recursive function for deep copying a list
         var deepCopy = function (obj) {
-            var copied, entry; 
-            copied = {};
+            var entry, copied = {};
 		    
             if (typeof(obj) === 'object') {
                 if (typeof(obj.length) === 'number')
@@ -249,14 +245,10 @@ List.prototype = {
                 }
             }
             return copied;
-        };
-		
-        var copy;
-        copy = new List();
+        };		
+        var copy = new List();
         copy.update(deepCopy(this));
         
         return copy;
     }
-	
 };
-
