@@ -118,7 +118,8 @@ List.prototype = {
         // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
         for (key in this.table)
-            keys.push(key);
+            if (this.table.hasOwnProperty(key))
+                keys.push(key);
         
         return keys;
     },
@@ -133,19 +134,20 @@ List.prototype = {
         
         // iterate through the keys in the list
         for (key in this.table) {
-            
-            // contains is false if the value does not already 
-            // appear in the values array and true if it is 
-            // found. when contains is true, break out of the loop.
-            contains = false;
-            for (i = 0; i < values.length && !contains; i = i + 1) 
-                if (this.get(key) === values[i])
-                    contains = true;
+            if (this.table.hasOwnProperty(key)) {
+                // contains is false if the value does not already 
+                // appear in the values array and true if it is 
+                // found. when contains is true, break out of the loop.
+                contains = false;
+                for (i = 0; i < values.length && !contains; i = i + 1) 
+                    if (this.get(key) === values[i])
+                        contains = true;
                 
-            // if the value is not already in the values array, 
-            // push the value
-            if (!contains)
-                values.push(this.get(key));
+                // if the value is not already in the values array, 
+                // push the value
+                if (!contains)
+                    values.push(this.get(key));
+            }
         }
         
         return values;
@@ -159,10 +161,12 @@ List.prototype = {
         var key, pair, itemlist = [];
         
         for (key in this.table) {
-            pair = [];
-            pair.push(key);
-            pair.push(this.table[key]);
-            itemlist.push(pair);
+            if (this.table.hasOwnProperty(key)) {
+                pair = [];
+                pair.push(key);
+                pair.push(this.table[key]);
+                itemlist.push(pair);
+            }
         }
         
         return itemlist;
@@ -177,7 +181,8 @@ List.prototype = {
         
         // count the entries in the table
         for (entry in this.table) 
-            len = len + 1;
+            if (this.table.hasOwnProperty(entry))
+                len = len + 1;
 
         return len;
     },
@@ -189,7 +194,8 @@ List.prototype = {
     clear: function () {
         var key;
         for (key in this.table)
-            delete this.table[key];
+            if (this.table.hasOwnProperty(key))
+                delete this.table[key];
     },
     
     
@@ -236,7 +242,8 @@ List.prototype = {
         
         // iterate through the input list, push the entries to the list
         for (key in list.table)
-            this.table[key] = list.table[key];
+            if (list.table.hasOwnProperty(key))
+                this.table[key] = list.table[key];
     },
 
 
