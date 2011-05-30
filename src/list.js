@@ -163,9 +163,7 @@ List.prototype = {
         
         for (key in this.table) {
             if (this.table.hasOwnProperty(key)) {
-                pair = [];
-                pair.push(key);
-                pair.push(this.table[key]);
+                pair = [key, this.table[key]];
                 itemlist.push(pair);
             }
         }
