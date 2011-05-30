@@ -95,14 +95,12 @@ List.prototype = {
      * returns the value removed.
      */
     remove: function (key) {
-        var val;
+        var val = this.table[key];
         
         // if no value is assigned to the key
-        if (this.table[key] === undefined)
+        if (val === undefined)
             return false;
             
-        // value associated with the key (for return)
-        val = this.table[key];
         delete this.table[key];
         
         return val;
