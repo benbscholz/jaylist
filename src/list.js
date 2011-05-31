@@ -183,8 +183,7 @@ List.prototype = {
      * clear: Removes the items from the list.
      */
     clear: function () {
-        var key;
-        for (key in this.table)
+        for (var key in this.table)
             if (this.table.hasOwnProperty(key))
                 delete this.table[key];
     },
