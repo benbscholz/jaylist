@@ -24,7 +24,6 @@
  */
  
 /**
- * @constructor
  * List allows access to elements through a key (string of characters).
  */
 var List = function () {
