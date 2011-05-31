@@ -40,7 +40,7 @@ var List = function () {
  *                       any value already assigned to the key. Returns
  *                       the value upon successful addition.
  *  remove(key)       -- Removes the object from the list. Returns
- *                       false if no value is assigned to the key. 
+ *                       undefined if no value is assigned to the key. 
  *                       Upon successful removal, it returns the value
  *                       removed.
  *  keys()            -- Returns an array of the keys in the list.
@@ -90,16 +90,12 @@ List.prototype = {
     
     /**
      * remove: Removes an object from the list with the given key. It returns
-     * false if no object with the given key exists in the list. Otherwise, it
-     * returns the value removed.
+     * undefined if no object with the given key exists in the list. Otherwise,
+     * it returns the value removed.
      */
     remove: function (key) {
         var val = this.table[key];
-        
-        // if no value is assigned to the key
-        if (val === undefined)
-            return false;
-            
+  
         delete this.table[key];
         
         return val;
