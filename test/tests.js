@@ -33,7 +33,7 @@ test('Remove items', function() {
     equals(jaylist.get("this"), undefined, 'Removed "this".');
     jaylist.remove("other");
     equals(jaylist.get("other"), undefined, 'Removed "other".');
-    equals(jaylist.remove("Missing"), false, 'Cannot remove value not in the list.');
+    equals(jaylist.remove("Missing"), undefined, 'Cannot remove value not in the list.');
 });
 
 test('Pop function', function () {
