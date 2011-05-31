@@ -154,14 +154,11 @@ List.prototype = {
      * items: Returns an array of key-value pairs: [[key, value]]
      */
     items: function () {
-        var key, pair, itemlist = [];
+        var key, itemlist = [];
         
-        for (key in this.table) {
-            if (this.table.hasOwnProperty(key)) {
-                pair = [key, this.table[key]];
-                itemlist.push(pair);
-            }
-        }
+        for (key in this.table) 
+            if (this.table.hasOwnProperty(key)) 
+                itemlist.push([key, this.table[key]]);
         
         return itemlist;
     },
