@@ -204,7 +204,7 @@ List.prototype = {
      * def is optional.
      */
     pop: function (key, def) {
-        return (this.hasKey(key)) ? this.remove(key) : def;
+        return this.hasKey(key) ? this.remove(key) : def;
     },
     
     
