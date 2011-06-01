@@ -251,12 +251,12 @@ List.prototype = {
                     copied = [];
                 for (entry in obj) {
                     if (obj.hasOwnProperty(entry)) {
-                        if (typeof(obj[entry]) === 'object')
-                            copied[entry] = deepCopy(obj[entry]);
-                        else if (typeof(obj[entry]) === 'string' || 'number' || 'function')
+                        if (typeof(obj[entry]) === 'string' || 'number' || 'function')
                             copied[entry] = obj[entry];
                         else if (typeof(obj[entry]) === 'boolean')
                             copied[entry] = (typeof(obj[entry])) ? true : false;
+                        else if (typeof(obj[entry]) === 'object')
+                            copied[entry] = deepCopy(obj[entry]);
                     }
                 }
             }
