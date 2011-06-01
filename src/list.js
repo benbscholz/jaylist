@@ -230,12 +230,12 @@ List.prototype = {
      * update: Adds all the entries from the input list to the list.
      */
     update: function (list) {
-        var key;
+        var self = this;
         
-        // iterate through the input list, push the entries to the list
-        for (key in list.table)
-            if (list.table.hasOwnProperty(key))
-                this.table[key] = list.table[key];
+        // iterate through the input list, push the entries to the list     
+        list.each( function (key) {
+            self.table[key] = list.table[key];
+        });
     },
 
 
@@ -245,7 +245,7 @@ List.prototype = {
     copy: function () {
         // recursive function for deep copying a list
         var deepCopy = function (obj) {
-            var entry, copied = {};
+            var entry, copied = new List();
 		    
             if (typeof(obj) === 'object') {
                 if (typeof(obj.length) === 'number')
