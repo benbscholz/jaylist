@@ -59,6 +59,10 @@ Deep copy a list:
 
     var newlist = jaylist.copy();
 
+Iterate through a list:
+
+    jaylist.each(function(key){somefunction(key);});
+
 ## jaylist Functions:
 
 ### add(key, value)
@@ -87,3 +91,5 @@ Deep copy a list:
 -- Adds the entries of the input list to the list.
 ### copy()
 -- Returns a deep copy of the list.
+### each(callback)
+-- Iterates through each entry in the list, calling callback with parameter key for each value.
