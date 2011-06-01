@@ -126,3 +126,10 @@ test("Copy function", function() {
     equals(jaylist.keys().toString(), 'string,number,boolean,array', 'Retrieved keys.');
     equals(jaylist.values().toString(), 'string value,4,false,4,5,6', 'Retrieved values.');
 });
+
+test("Each function", function() {
+    expect(2);
+    equals(jaylist.len(), 4, "List of length 4.");
+    jaylist.each(function(key){jaylist.pop(key)});
+    equals(jaylist.len(), 0, "Popped each item in the list");
+});
