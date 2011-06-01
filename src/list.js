@@ -107,13 +107,13 @@ List.prototype = {
      * keys: Returns an array of the keys in the List.
      */
     keys: function () {
-        var key, keys = [];
+        var keys = [];
         
         // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
-        for (key in this.table)
-            if (this.table.hasOwnProperty(key))
-                keys.push(key);
+        this.each( function (key) {
+            keys.push(key);
+        });
         
         return keys;
     },
@@ -124,28 +124,27 @@ List.prototype = {
      * are only displayed once.
      */
     values: function () {
-        var i, key, contains, values = [];
+        var i, contains, self = this, values = [];
         
         // iterate through the keys in the list
-        for (key in this.table) {
-            if (this.table.hasOwnProperty(key)) {
-                
-                // decrement the value for the length of values.
-                // contains is false if the value does not already 
-                // appear in the values array and true if it is 
-                // found. when contains is true, break out of the loop.
-                contains = false;
-                i = values.length;
-                while (i-- && !contains) 
-                    if (this.get(key) === values[i])
-                        contains = true;
-                
-                // if the value is not already in the values array, 
-                // push the value
-                if (!contains)
-                    values.push(this.get(key));
-            }
-        }
+        this.each( function (key) {
+            
+            contains = false;
+            i = values.length;
+            
+            // decrement the value for the length of values.
+            // contains is false if the value does not already 
+            // appear in the values array and true if it is 
+            // found. when contains is true, break out of the loop.
+            while (i-- && !contains)
+                if (self.get(key) === values[i])
+                    contains = true;
+            
+            // if the value is not already in the values array, 
+            // push the value        
+            if (!contains)
+                values.push(self.get(key));
+        });
         
         return values;
     },
@@ -155,11 +154,11 @@ List.prototype = {
      * items: Returns an array of key-value pairs: [[key, value]]
      */
     items: function () {
-        var key, itemlist = [];
+        var self = this, itemlist = [];
         
-        for (key in this.table) 
-            if (this.table.hasOwnProperty(key)) 
-                itemlist.push([key, this.table[key]]);
+        this.each( function (key) { 
+            itemlist.push([key, self.table[key]]); 
+        });
         
         return itemlist;
     },
@@ -169,13 +168,13 @@ List.prototype = {
      * len: Returns the number of items in the list. Returns zero if empty.
      */
     len: function () {
-        var entry, len = 0;
+        var len = 0, self = this;
         
         // count the entries in the table
-        for (entry in this.table) 
-            if (this.table.hasOwnProperty(entry))
-                len = len + 1;
-
+        this.each( function () { 
+            len = len + 1; 
+        });
+        
         return len;
     },
     
@@ -184,9 +183,11 @@ List.prototype = {
      * clear: Removes the items from the list.
      */
     clear: function () {
-        for (var key in this.table)
-            if (this.table.hasOwnProperty(key))
-                delete this.table[key];
+        var self = this;
+        
+        this.each( function (key) { 
+            delete self.table[key]; 
+        });
     },
     
     
@@ -251,7 +252,7 @@ List.prototype = {
                     copied = [];
                 for (entry in obj) {
                     if (obj.hasOwnProperty(entry)) {
-                        if (typeof(obj[entry]) === 'string' || 'number' || 'function')
+                        if (typeof(obj[entry]) === 'string' || 'number')
                             copied[entry] = obj[entry];
                         else if (typeof(obj[entry]) === 'boolean')
                             copied[entry] = (typeof(obj[entry])) ? true : false;
