@@ -91,23 +91,21 @@ test("popItem function", function () {
 test("Mass retrieval", function() {
     expect(3);
     jaylist.update(copylist);
-    // object prevents testing the values() return
-    jaylist.remove("object");
-    equals(jaylist.keys().toString(), 'string,number,boolean,array', 'Retrieved keys.');
-    equals(jaylist.values().toString(), 'string value,4,false,4,5,6', 'Retrieved values.');
-    equals(jaylist.items().toString(), 'string,string value,number,4,boolean,false,array,4,5,6', 'Retrieved items.');
+    equals(jaylist.keys().toString(), 'string,number,boolean,array,object', 'Retrieved keys.');
+    equals(jaylist.values().toString(), 'string value,4,false,4,5,6,[object Object]', 'Retrieved values.');
+    equals(jaylist.items().toString(), 'string,string value,number,4,boolean,false,array,4,5,6,object,[object Object]', 'Retrieved items.');
 });
 
 test("Length functions", function() {
     expect(2);
-    equals(jaylist.len(), 4, 'Retrieved length.');
+    equals(jaylist.len(), 5, 'Retrieved length.');
     var emptylist = new List();
     equals(emptylist.len(), 0, 'Retrieved empty list length.')
 });
 
 test("Clear functions", function() {
     expect(2);
-    equals(jaylist.len(), 4, 'Non-zero length retrieved.')
+    equals(jaylist.len(), 5, 'Non-zero length retrieved.')
     jaylist.clear();
     equals(jaylist.len(), 0, 'Cleared list.');
 });
@@ -121,15 +119,13 @@ test("Update function", function() {
 test("Copy function", function() {
 	expect(2);
 	jaylist = copylist.copy();
-	// object prevents testing the values() return
-    jaylist.remove("object");
-    equals(jaylist.keys().toString(), 'string,number,boolean,array', 'Retrieved keys.');
-    equals(jaylist.values().toString(), 'string value,4,false,4,5,6', 'Retrieved values.');
+    equals(jaylist.keys().toString(), 'string,number,boolean,array,object', 'Retrieved keys.');
+    equals(jaylist.values().toString(), 'string value,4,false,4,5,6,[object Object]', 'Retrieved values.');
 });
 
 test("Each function", function() {
     expect(2);
-    equals(jaylist.len(), 4, "List of length 4.");
+    equals(jaylist.len(), 5, "List of length 5.");
     jaylist.each(function(key){jaylist.pop(key)});
     equals(jaylist.len(), 0, "Popped each item in the list");
 });
