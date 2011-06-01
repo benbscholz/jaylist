@@ -63,7 +63,8 @@ var List = function () {
  *  update(list)      -- Updates the list with the entries of the input
  *                       list.
  *  copy()            -- Returns a deep copy of the list.
- *
+ *  each(callback)    -- Iterates over the entries in the list, passing
+ *                       the parameter 'key'.
  *
  */
 List.prototype = {
@@ -265,5 +266,16 @@ List.prototype = {
         copy.update(deepCopy(this));
         
         return copy;
+    },
+    
+    
+    /**
+     * each: Iterates over each entry in the list, calling the callback with the
+     * parameter 'key'.
+     */
+    each: function (callback) {
+        for (var entry in this.table)
+            if (this.table.hasOwnProperty(entry))
+                callback(entry);
     }
 };
