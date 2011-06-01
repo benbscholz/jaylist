@@ -253,7 +253,7 @@ List.prototype = {
                     if (obj.hasOwnProperty(entry)) {
                         if (typeof(obj[entry]) === 'object')
                             copied[entry] = deepCopy(obj[entry]);
-                        else if (typeof(obj[entry]) === 'string' || 'number')
+                        else if (typeof(obj[entry]) === 'string' || 'number' || 'function')
                             copied[entry] = obj[entry];
                         else if (typeof(obj[entry]) === 'boolean')
                             copied[entry] = (typeof(obj[entry])) ? true : false;
@@ -274,8 +274,8 @@ List.prototype = {
      * parameter 'key'.
      */
     each: function (callback) {
-        for (var entry in this.table)
-            if (this.table.hasOwnProperty(entry))
-                callback(entry);
+        for (var key in this.table)
+            if (this.table.hasOwnProperty(key))
+                callback(key);
     }
 };
