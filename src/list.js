@@ -111,7 +111,7 @@ List.prototype = {
         
         // iterate through the hash pairs in the table, pushing each key
         // to the keys array.
-        this.each( function (key) {
+        this.each(function (key) {
             keys.push(key);
         });
         
@@ -127,7 +127,7 @@ List.prototype = {
         var i, contains, self = this, values = [];
         
         // iterate through the keys in the list
-        this.each( function (key) {
+        this.each(function (key) {
             
             contains = false;
             i = values.length;
@@ -156,7 +156,7 @@ List.prototype = {
     items: function () {
         var self = this, itemlist = [];
         
-        this.each( function (key) { 
+        this.each(function (key) { 
             itemlist.push([key, self.table[key]]); 
         });
         
@@ -171,7 +171,7 @@ List.prototype = {
         var len = 0, self = this;
         
         // count the entries in the table
-        this.each( function () { 
+        this.each(function () { 
             len = len + 1; 
         });
         
@@ -185,7 +185,7 @@ List.prototype = {
     clear: function () {
         var self = this;
         
-        this.each( function (key) { 
+        this.each(function (key) { 
             delete self.table[key]; 
         });
     },
@@ -233,7 +233,7 @@ List.prototype = {
         var self = this;
         
         // iterate through the input list, push the entries to the list     
-        list.each( function (key) {
+        list.each(function (key) {
             self.table[key] = list.table[key];
         });
     },
