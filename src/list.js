@@ -168,7 +168,7 @@ List.prototype = {
      * len: Returns the number of items in the list. Returns zero if empty.
      */
     len: function () {
-        var len = 0, self = this;
+        var len = 0;
         
         // count the entries in the table
         this.each(function () { 
