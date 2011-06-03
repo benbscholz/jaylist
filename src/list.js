@@ -245,10 +245,13 @@ List.prototype = {
     copy: function () {
         // recursive function for deep copying a list
         var deepCopy = function (obj) {
-            var entry, copied = new List();
+            var entry, copied = {};
 		    
             if (typeof(obj) === 'object') {
-                if (typeof(obj.length) === 'number')
+                // check if the object is an instance of List
+                if (obj instanceof List)
+                    copied = new List();
+                else if (typeof(obj.length) === 'number')
                     copied = [];
                 for (entry in obj) {
                     if (obj.hasOwnProperty(entry)) {
