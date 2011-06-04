@@ -204,8 +204,12 @@ List.prototype = {
     popItem: function () {
         var pair, keys = this.keys();
         
+        // make sure there are keys in the list
+        if (keys.length === 0)
+            return undefined;
+            
         // pop a random key from the key list and push it to the pair
-        pair = [keys[Math.floor(Math.random() * keys.length)]];
+        pair = [keys[0]];
         
         // push the value to the pair and remove it
         pair.push(this.remove(pair[0]));
