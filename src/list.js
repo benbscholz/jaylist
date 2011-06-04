@@ -250,15 +250,15 @@ List.prototype = {
             // check if the object is an instance of List
             if (obj instanceof List)
                 copied = new List();
-            else if (typeof(obj.length) === 'number')
+            else if (typeof obj.length === 'number')
                 copied = [];
             for (entry in obj) {
                 if (obj.hasOwnProperty(entry)) {
-                    if (typeof(obj[entry]) === 'string' || 'number')
+                    if (typeof obj[entry] === 'string' || 
+                        typeof obj[entry] === 'number' ||
+                        typeof obj[entry] === 'boolean')
                         copied[entry] = obj[entry];
-                    else if (typeof(obj[entry]) === 'boolean')
-                        copied[entry] = (typeof(obj[entry])) ? true : false;
-                    else if (typeof(obj[entry]) === 'object')
+                    else if (typeof obj[entry] === 'object')
                         copied[entry] = deepCopy(obj[entry]);
                 }
             }
