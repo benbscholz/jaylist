@@ -107,15 +107,7 @@ List.prototype = {
      * keys: Returns an array of the keys in the List.
      */
     keys: function () {
-        var keys = [];
-        
-        // iterate through the hash pairs in the table, pushing each key
-        // to the keys array.
-        this.each(function (key) {
-            keys.push(key);
-        });
-        
-        return keys;
+        return Object.keys(this.table);
     },
     
     
