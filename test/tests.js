@@ -129,3 +129,13 @@ test("Each function", function() {
     jaylist.each(function(key){jaylist.pop(key)});
     equals(jaylist.len(), 0, "Popped each item in the list");
 });
+
+test("Next function", function() {
+    expect(3);
+    var alist = new List();
+    alist.add("this", "that");
+    alist.add("us", "them");
+    ok(alist.hasKey(alist.next()));
+    ok(alist.hasKey(alist.next()));
+    equals(alist.next(), undefined);
+});
