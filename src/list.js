@@ -75,7 +75,10 @@ List.prototype = {
      * if it isn't found.
      */
     get: function(key) {
-        return this.table[key];
+        if (this.table.hasOwnProperty(key))
+            return this.table[key];
+        else
+            return undefined;
     },
     
     
