@@ -63,6 +63,10 @@ Iterate through a list:
 
     jaylist.each(function(key){somefunction(key);});
 
+Iterate through a list:
+
+    while(jaylist.next()) {...}
+
 ## jaylist Functions:
 
 ### add(key, value)
@@ -93,3 +97,5 @@ Iterate through a list:
 -- Returns a deep copy of the list.
 ### each(callback)
 -- Iterates through each entry in the list, calling callback with parameter key for each value.
+### next()
+-- Iterates through each entry in the list, returning a key on each call. When the iteration is complete, next() returns undefined & the iteration can begin again.
