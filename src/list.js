@@ -25,9 +25,11 @@
  
 /**
  * List allows access to elements through a key (string of characters).
+ * nextKeys is a placeholder for the next() iterator.
  */
 var List = function () {
     this.table = {};
+    this.nextKeys = undefined;
 };
 
 /**
@@ -65,7 +67,9 @@ var List = function () {
  *  copy()            -- Returns a deep copy of the list.
  *  each(callback)    -- Iterates over the entries in the list, passing
  *                       the parameter 'key'.
- *
+ *  next()            -- Iterates over the entries in the list returning
+ *                       the key until the iteration is complete (calling
+ *                       next() at this point will return undefined.
  */
 List.prototype = {
 
@@ -274,5 +278,24 @@ List.prototype = {
         for (var key in this.table)
             if (this.table.hasOwnProperty(key))
                 callback(key);
+    },
+    
+    
+    /**
+     * next: Iterates over the list, returning the key of next entry on each call.
+     * Returns undefined when the iteration is complete.
+     */
+    next: function () {
+        if (this.nextKeys !== undefined && this.nextKeys.length !== 0)
+            return this.nextKeys.pop();
+        else if (this.nextKeys === undefined) {
+            this.nextKeys = this.keys();
+            return this.nextKeys.pop();
+        } else if (this.nextKeys.length === 0)
+            return this.nextKeys = undefined;
     }
 };
+
+
+
+
