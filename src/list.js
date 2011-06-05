@@ -29,7 +29,7 @@
  */
 var List = function () {
     this.table = {};
-    this.nextKeys = undefined;
+    this.nextKeys;
 };
 
 /**
