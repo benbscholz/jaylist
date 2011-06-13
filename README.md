@@ -67,6 +67,10 @@ Iterate through a list:
 
     while(jaylist.next()) {...}
 
+Return an object representation of the list:
+
+    var obj = jaylist.object();
+
 ## jaylist Functions:
 
 ### add(key, value)
@@ -99,3 +103,5 @@ Iterate through a list:
 -- Iterates through each entry in the list, calling callback with parameter key for each value.
 ### next()
 -- Iterates through each entry in the list, returning a key on each call. When the iteration is complete, next() returns undefined & the iteration can begin again.
+### object()
+-- Returns the list as an object of key-value pairs.
