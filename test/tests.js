@@ -139,3 +139,13 @@ test("Next function", function() {
     ok(alist.hasKey(alist.next()));
     equals(alist.next(), undefined);
 });
+
+test("Object function", function() {
+    expect(2);
+    var listy = new List()
+    listy.add("key1", "value1");
+    listy.add("key2", "value2");
+    var obj = listy.object();
+    equals(obj['key1'], "value1");
+    equals(obj['key2'], "value2");
+});
