@@ -70,6 +70,7 @@ var List = function () {
  *  next()            -- Iterates over the entries in the list returning
  *                       the key until the iteration is complete (calling
  *                       next() at this point will return undefined.
+ *  object()          -- Returns the key value list as an object.
  */
 List.prototype = {
 
@@ -293,9 +294,12 @@ List.prototype = {
             return this.nextKeys.pop();
         } else if (this.nextKeys.length === 0)
             return this.nextKeys = undefined;
+    },
+    
+    /**
+     * Return the key-value list as an object.
+     */
+    object: function () {
+       return this._table;
     }
 };
-
-
-
-
