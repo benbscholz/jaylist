@@ -28,7 +28,7 @@
  * nextKeys is a placeholder for the next() iterator.
  */
 var List = function () {
-    this.table = {};
+    this._table = {};
     this.nextKeys;
 };
 
@@ -79,8 +79,8 @@ List.prototype = {
      * if it isn't found.
      */
     get: function(key) {
-        if (this.table.hasOwnProperty(key))
-            return this.table[key];
+        if (this._table.hasOwnProperty(key))
+            return this._table[key];
         else
             return undefined;
     },
@@ -93,7 +93,7 @@ List.prototype = {
      * is overwritten.
      */
     add: function (key, value) {     
-        return (this.table[key] = value);
+        return (this._table[key] = value);
     },
     
     /**
@@ -102,9 +102,9 @@ List.prototype = {
      * it returns the value removed.
      */
     remove: function (key) {
-        var val = this.table[key];
+        var val = this._table[key];
   
-        delete this.table[key];
+        delete this._table[key];
         
         return val;
     },
@@ -114,7 +114,7 @@ List.prototype = {
      * keys: Returns an array of the keys in the List.
      */
     keys: function () {
-        return Object.keys(this.table);
+        return Object.keys(this._table);
     },
     
     
@@ -156,7 +156,7 @@ List.prototype = {
         var self = this, itemlist = [];
         
         this.each(function (key) { 
-            itemlist.push([key, self.table[key]]); 
+            itemlist.push([key, self._table[key]]); 
         });
         
         return itemlist;
@@ -182,7 +182,7 @@ List.prototype = {
      * clear: Removes the items from the list.
      */
     clear: function () {
-        this.table = {};
+        this._table = {};
     },
     
     
@@ -233,7 +233,7 @@ List.prototype = {
         
         // iterate through the input list, push the entries to the list     
         list.each(function (key) {
-            self.table[key] = list.table[key];
+            self._table[key] = list._table[key];
         });
     },
 
@@ -275,8 +275,8 @@ List.prototype = {
      * parameter 'key'.
      */
     each: function (callback) {
-        for (var key in this.table)
-            if (this.table.hasOwnProperty(key))
+        for (var key in this._table)
+            if (this._table.hasOwnProperty(key))
                 callback(key);
     },
     
