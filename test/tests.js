@@ -146,6 +146,6 @@ test("Object function", function() {
     listy.add("key1", "value1");
     listy.add("key2", "value2");
     var obj = listy.object();
-    equals(obj['key1'], "value1");
-    equals(obj['key2'], "value2");
+    equals(obj['key1'], "value1", "Retrieved value1.");
+    equals(obj['key2'], "value2", "Retrieved value2.");
 });
