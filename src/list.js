@@ -41,10 +41,11 @@ var List = function () {
  *  add(key, value)   -- Insert an object into the list, overwriting
  *                       any value already assigned to the key. Returns
  *                       the value upon successful addition.
- *  remove(key)       -- Removes the object from the list. Returns
+ *  remove(item)      -- Removes the object from the list. Returns
  *                       undefined if no value is assigned to the key. 
  *                       Upon successful removal, it returns the value
- *                       removed.
+ *                       removed. A list or array of keys may also be 
+ *                       passed.
  *  keys()            -- Returns an array of the keys in the list.
  *  values()          -- Returns an array of the values in the list
  *                       with each value appearing only once.
@@ -100,14 +101,21 @@ List.prototype = {
     /**
      * remove: Removes an object from the list with the given key. It returns
      * undefined if no object with the given key exists in the list. Otherwise,
-     * it returns the value removed.
+     * it returns the value removed. A list or array of keys may also be passed.
      */
-    remove: function (key) {
-        var val = this._table[key];
-  
-        delete this._table[key];
-        
-        return val;
+    remove: function (item) {
+        if (item instanceof List) {
+            while (nitem = item.next()) {
+                delete this._table[nitem];
+            }
+        } else if (toString.call(item) === "[object Array]") {
+            while (item.length !== 0)
+                delete this._table[item.pop()];
+        } else {
+            var val = this._table[item];
+            delete this._table[item];
+            return val;
+        }
     },
     
     
