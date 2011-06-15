@@ -38,7 +38,7 @@ test("Get items", function() {
 
 
 test("Remove items", function() {
-    expect(11);
+    expect(31);
     copylist = jaylist.copy();
     equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
     jaylist.remove("string");
@@ -56,6 +56,30 @@ test("Remove items", function() {
     jaylist.remove("object");
     equals(jaylist.get("object"), undefined, 'Removed "object".');
     equals(jaylist.remove("missing"), undefined, 'Cannot remove value not in the list.');
+    jaylist.update(copylist);
+    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
+    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+    jaylist.remove(["string","number","boolean","array","object"]);
+    equals(jaylist.get("string"), undefined, 'Removed "string".');
+    equals(jaylist.get("number"), undefined, 'Removed "number".');
+    equals(jaylist.get("boolean"), undefined, 'Removed "boolean".');
+    equals(jaylist.get("array"), undefined, 'Removed "array".');
+    equals(jaylist.get("object"), undefined, 'Removed "object".');
+    jaylist.update(copylist);
+    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
+    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+    jaylist.remove(copylist);
+    equals(jaylist.get("string"), undefined, 'Removed "string".');
+    equals(jaylist.get("number"), undefined, 'Removed "number".');
+    equals(jaylist.get("boolean"), undefined, 'Removed "boolean".');
+    equals(jaylist.get("array"), undefined, 'Removed "array".');
+    equals(jaylist.get("object"), undefined, 'Removed "object".');
 });
 
 test("Pop function", function () {
