@@ -78,7 +78,7 @@ Return an object representation of the list:
 ### get(key)
 --Returns the value associated with key, undefined if the key has not been entered into the list.
 ### remove(key)
---Removes the object from the list. Returns undefined if no value is assigned to the key. Upon successful removal, it returns the value removed.
+--Removes the object from the list. Returns undefined if no value is assigned to the key. Upon successful removal, it returns the value removed. A list or array of keys may also be passed.
 ### keys()
 --Returns an array of the keys in the list.
 ### values()
