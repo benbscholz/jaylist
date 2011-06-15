@@ -25,11 +25,11 @@
  
 /**
  * List allows access to elements through a key (string of characters).
- * nextKeys is a placeholder for the next() iterator.
+ * _next is a placeholder for the next() iterator.
  */
 var List = function () {
     this._table = {};
-    this.nextKeys;
+    this._next;
 };
 
 /**
@@ -287,13 +287,13 @@ List.prototype = {
      * Returns undefined when the iteration is complete.
      */
     next: function () {
-        if (this.nextKeys !== undefined && this.nextKeys.length !== 0)
-            return this.nextKeys.pop();
-        else if (this.nextKeys === undefined) {
-            this.nextKeys = this.keys();
-            return this.nextKeys.pop();
-        } else if (this.nextKeys.length === 0)
-            return this.nextKeys = undefined;
+        if (this._next !== undefined && this._next.length !== 0)
+            return this._next.pop();
+        else if (this._next === undefined) {
+            this._next = this.keys();
+            return this._next.pop();
+        } else if (this._next.length === 0)
+            return this._next = undefined;
     },
     
     /**
