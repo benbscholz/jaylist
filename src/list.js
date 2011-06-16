@@ -105,9 +105,8 @@ List.prototype = {
      */
     remove: function (item) {
         if (item instanceof List) {
-            while (nitem = item.next()) {
+            while (nitem = item.next()) 
                 delete this._table[nitem];
-            }
         } else if (toString.call(item) === "[object Array]") {
             while (item.length !== 0)
                 delete this._table[item.pop()];
