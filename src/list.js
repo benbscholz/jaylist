@@ -107,7 +107,7 @@ List.prototype = {
         if (item instanceof List) {
             while (nitem = item.next()) 
                 delete this._table[nitem];
-        } else if (toString.call(item) === "[object Array]") {
+        } else if (Object.prototype.toString.call(item) === "[object Array]") {
             while (item.length !== 0)
                 delete this._table[item.pop()];
         } else {
@@ -261,7 +261,7 @@ List.prototype = {
                 copied = [];
             for (entry in obj) {
                 if (obj.hasOwnProperty(entry)) {
-                    if (typeof obj[entry] === 'string' || 
+                    if (typeof obj[entry] === 'string' ||
                         typeof obj[entry] === 'number' ||
                         typeof obj[entry] === 'boolean')
                         copied[entry] = obj[entry];
@@ -303,8 +303,9 @@ List.prototype = {
             return this._next = undefined;
     },
     
+    
     /**
-     * Return the key-value list as an object.
+     * object: Return the key-value list as an object.
      */
     object: function () {
        return this._table;
