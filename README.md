@@ -71,6 +71,10 @@ Return an object representation of the list:
 
     var obj = jaylist.object();
 
+Check if two lists are equal:
+
+    jaylist.isEqual(list);
+
 ## jaylist Functions:
 
 ### add(key, value)
@@ -105,3 +109,5 @@ Return an object representation of the list:
 -- Iterates through each entry in the list, returning a key on each call. When the iteration is complete, next() returns undefined & the iteration can begin again.
 ### object()
 -- Returns the list as an object of key-value pairs.
+### isEqual(list)
+-- Returns true if the lists are equivalent and false otherwise.
