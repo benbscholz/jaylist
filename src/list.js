@@ -72,6 +72,8 @@ var List = function () {
  *                       the key until the iteration is complete (calling
  *                       next() at this point will return undefined.
  *  object()          -- Returns the key value list as an object.
+ *  isEqual(list)     -- Returns true if the lists are equivalent and false 
+ *                       otherwise.
  */
 List.prototype = {
 
@@ -104,12 +106,18 @@ List.prototype = {
      * it returns the value removed. A list or array of keys may also be passed.
      */
     remove: function (item) {
+        // item is a list: remove all keys from parent object
         if (item instanceof List) {
             while (nitem = item.next()) 
                 delete this._table[nitem];
+                
+        // item is an array: remove keys from parent object
         } else if (Object.prototype.toString.call(item) === "[object Array]") {
             while (item.length !== 0)
                 delete this._table[item.pop()];
+                
+        // item is a single key: remove it and return its value (undefined is returned
+        // if the key is not a member of the parent object).
         } else {
             var val = this._table[item];
             delete this._table[item];
@@ -147,8 +155,7 @@ List.prototype = {
                 if (self.get(key) === values[i])
                     contains = true;
             
-            // if the value is not already in the values array, 
-            // push the value        
+            // push the value if it is not in the values array      
             if (!contains)
                 values.push(self.get(key));
         });
@@ -163,6 +170,7 @@ List.prototype = {
     items: function () {
         var self = this, itemlist = [];
         
+        // push each key and value to itemlist
         this.each(function (key) { 
             itemlist.push([key, self._table[key]]); 
         });
@@ -254,23 +262,31 @@ List.prototype = {
         var deepCopy = function (obj) {
             var entry, copied = {};
 
-            // check if the object is an instance of List
+            // object is an instance of List
             if (obj instanceof List)
                 copied = new List();
-            else if (typeof obj.length === 'number')
+                
+            // object is an array
+            else if (Object.prototype.toString.call(obj))
                 copied = [];
+            
+            // copy each member of the object
             for (entry in obj) {
                 if (obj.hasOwnProperty(entry)) {
                     if (typeof obj[entry] === 'string' ||
                         typeof obj[entry] === 'number' ||
                         typeof obj[entry] === 'boolean')
                         copied[entry] = obj[entry];
+                    
+                    // if member is object, recursively call deepCopy(obj)
                     else if (typeof obj[entry] === 'object')
                         copied[entry] = deepCopy(obj[entry]);
                 }
             }
             return copied;
         };		
+        
+        // create a new list and fill it with the result of deepCopy(obj)
         var copy = new List();
         copy.update(deepCopy(this));
         
@@ -294,11 +310,16 @@ List.prototype = {
      * Returns undefined when the iteration is complete.
      */
     next: function () {
+        // _next contains keys to iterate through
         if (this._next !== undefined && this._next.length !== 0)
             return this._next.pop();
+            
+        // _next is empty; fill it with keys and pop one
         else if (this._next === undefined) {
             this._next = this.keys();
             return this._next.pop();
+            
+        // iteration complete, reset _next
         } else if (this._next.length === 0)
             return this._next = undefined;
     },
@@ -309,5 +330,59 @@ List.prototype = {
      */
     object: function () {
        return this._table;
+    },
+    
+    
+    /**
+     * isEqual: Returns true if the lists are equivalent and false otherwise.
+     */
+    isEqual: function (list) {
+        // recursive function for equality checking
+        var deepEquals = function (a_obj, b_obj) {
+        
+            var i, key, atype = typeof a_obj, btype = typeof b_obj;
+            
+            // basic equality checks
+            if (a_obj === b_obj)
+                return true;
+            if (atype !== btype)
+                return false;
+                
+            // a_obj and b_obj are arrays; check their members
+            if (Object.prototype.toString.call(a_obj) === 
+                Object.prototype.toString.call(b_obj) === "[object Array]") {
+                if (a_obj.length !== b_obj.length)
+                    return false;
+                for (i = 0; i < a_obj.length; i += 1)
+                    if (a_obj[i] !== b_obj[i]) 
+                        return false;
+                return true;
+            }
+            
+            // if a_obj and b_obj aren't objects, at this point, they aren't equal
+            if (atype !== "object") 
+                return false;
+                
+            // check number of keys in object
+            if (Object.keys(a_obj).length !== Object.keys(b_obj).length)
+                return false;
+                
+            // equality of key-values and recursive call to deepEquals()
+            for (key in a_obj) {
+                if (!b_obj.hasOwnProperty(key))
+                    return false;
+                if (a_obj.hasOwnProperty(key) && b_obj.hasOwnProperty(key))
+                    return deepEquals(a_obj[key], b_obj[key]);
+            }
+            
+            // if it has made it this far, a_obj and b_obj are equal
+            return true;
+        };
+        
+        // check if list argument is actually a list
+        if (!(list instanceof List))
+            return false;
+            
+        return deepEquals(this._table, list._table);
     }
 };
