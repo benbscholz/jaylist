@@ -173,3 +173,12 @@ test("Object function", function() {
     equals(obj['key1'], "value1", "Retrieved value1.");
     equals(obj['key2'], "value2", "Retrieved value2.");
 });
+
+test("Equality function", function() {
+    expect(4);
+    jaylist.update(copylist);
+    ok(jaylist.isEqual(copylist), "Lists are equal");
+    ok(copylist.isEqual(jaylist), "Lists are equal");
+    ok(!jaylist.isEqual([1,2,3]), "List is not equal to an array");
+    ok(!jaylist.isEqual(otherlist), "List is not equal to list");
+});
