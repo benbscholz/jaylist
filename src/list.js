@@ -267,7 +267,7 @@ List.prototype = {
                 copied = new List();
                 
             // object is an array
-            else if (Object.prototype.toString.call(obj))
+            else if (Object.prototype.toString.call(obj) === '[object Array]')
                 copied = [];
             
             // copy each member of the object
