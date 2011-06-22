@@ -30,6 +30,19 @@
 var List = function () {
     this._table = {};
     this._next;
+
+    /**
+     * _isArray(item): an iternal array type checker. It returns true 
+     * if item is an array and false otherwise.
+     */
+    this._isArray = function (item) {
+        if (item && typeof item === 'object' && item.constructor === Array) 
+            return true;
+        else if (Object.prototype.toString.call(item) == '[object Array]')
+            return true;
+        else
+            return false;
+    }
 };
 
 /**
@@ -82,7 +95,7 @@ List.prototype = {
      * get: Returns the value attached to the given key or undefined 
      * if it isn't found.
      */
-    get: function(key) {
+    get: function (key) {
         if (this._table.hasOwnProperty(key))
             return this._table[key];
         else
@@ -112,7 +125,7 @@ List.prototype = {
                 delete this._table[nitem];
                 
         // item is an array: remove keys from parent object
-        } else if (Object.prototype.toString.call(item) === "[object Array]") {
+        } else if (this._isArray(item)) {
             while (item.length !== 0)
                 delete this._table[item.pop()];
                 
@@ -206,7 +219,7 @@ List.prototype = {
      * hasKey: Returns true if the list contains the given key and false if
      * if does not.
      */
-    hasKey: function(key) {
+    hasKey: function (key) {
         return (this.get(key) !== undefined);
     },
     
@@ -258,16 +271,20 @@ List.prototype = {
      * copy: Returns a deep copy of the list.
      */
     copy: function () {
+        
         // recursive function for deep copying a list
         var deepCopy = function (obj) {
             var entry, copied = {};
+            
+            // hack to allow calling _isArray(item)
+            var self = new List();
 
             // object is an instance of List
             if (obj instanceof List)
                 copied = new List();
                 
             // object is an array
-            else if (Object.prototype.toString.call(obj) === '[object Array]')
+            else if (self._isArray(obj))
                 copied = [];
             
             // copy each member of the object
@@ -337,10 +354,13 @@ List.prototype = {
      * isEqual: Returns true if the lists are equivalent and false otherwise.
      */
     isEqual: function (list) {
+
         // recursive function for equality checking
         var deepEquals = function (a_obj, b_obj) {
         
             var i, key, atype = typeof a_obj, btype = typeof b_obj;
+            // hack for calling _isArray(item) from deepEquals
+            var self = new List();
             
             // basic equality checks
             if (a_obj === b_obj)
@@ -349,8 +369,7 @@ List.prototype = {
                 return false;
                 
             // a_obj and b_obj are arrays; check their members
-            if (Object.prototype.toString.call(a_obj) === 
-                Object.prototype.toString.call(b_obj) === "[object Array]") {
+            if (self._isArray(a_obj) && self._isArray(b_obj)) {
                 if (a_obj.length !== b_obj.length)
                     return false;
                 for (i = 0; i < a_obj.length; i += 1)
