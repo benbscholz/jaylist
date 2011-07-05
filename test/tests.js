@@ -141,8 +141,8 @@ test("Update function", function() {
 });
 
 test("Copy function", function() {
-	expect(2);
-	jaylist = copylist.copy();
+expect(2);
+jaylist = copylist.copy();
     equals(jaylist.keys().toString(), 'string,number,boolean,array,object', 'Retrieved keys.');
     equals(jaylist.values().toString(), 'string value,4,false,4,5,6,[object Object]', 'Retrieved values.');
 });
