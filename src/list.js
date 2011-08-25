@@ -347,7 +347,6 @@ List.prototype = (function () {
     * copy: Returns a deep copy of the list.
     */
     var copy = function () {
-            
         // create a new list and fill it with the result of deepCopy(obj)
         var copy = new List();
         copy.update(_deepCopy(this));
@@ -400,8 +399,7 @@ List.prototype = (function () {
    /**
     * isEqual: Returns true if the lists are equivalent and false otherwise.
     */
-    var isEqual = function (list) {
-            
+    var isEqual = function (list) {           
         // check if list argument is actually a list
         if (!(list instanceof List))
             return false;
