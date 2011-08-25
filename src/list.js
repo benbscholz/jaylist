@@ -303,7 +303,10 @@ List.prototype = (function () {
     * def is optional.
     */
     var pop = function (key, def) {
-        return this.hasKey(key) ? this.remove(key) : def;
+        if (this.hasKey(key))
+        	this.remove(key);
+        else
+        	return def;
     };
         
         
