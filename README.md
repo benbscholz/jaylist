@@ -5,7 +5,7 @@ Much of the functionality was inspired by Python's dictionary.
 ## Usage:
 ###Create the list:
 
-    var jaylist = new List(); 
+    var jaylist = list(); 
    
 ###Add a value to the list:
 
