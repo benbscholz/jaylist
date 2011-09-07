@@ -1,59 +1,9 @@
-/**
- * jaylist is a wrapper for javascript's built-in hash storage system.
- * It provides functions to manipulate the list.
- *
- * Copyright (C) 2011 by Ben Brooks Scholz. MIT Licensed.
- *
- */
- 
-/**
- * List functions to create and manipulate a hashed list.
- *
- *  get(key)          -- Returns the value associated with key, un-
- *                       defined if there is no values associated
- *                       with the key.
- *  add(key, value)   -- Insert an object into the list, overwriting
- *                       any value already assigned to the key. Returns
- *                       the value upon successful addition.
- *  remove(item)      -- Removes the object from the list. Returns
- *                       undefined if no value is assigned to the key. 
- *                       Upon successful removal, it returns the value
- *                       removed. A list or array of keys may also be 
- *                       passed.
- *  keys()            -- Returns an array of the keys in the list.
- *  values()          -- Returns an array of the values in the list
- *                       with each value appearing only once.
- *  items()           -- Returns an array of key value pairs.
- *  len()             -- Returns the number of elements in the list, 
- *                       zero if empty.
- *  clear()           -- Removes the items from the list.
- *  hasKey(key)       -- Returns true if the list contains the key and 
- *                       false if it does not.
- *  pop(key, default) -- Returns the value associated with the key and
- *                       removes it. If the value doesn't exist return
- *                       default. Default is an optional argument that 
- *                       is set to undefined.
- *  popItem()         -- Returns a random key value pair ( [key, value] )
- *                       and removes it. Like it's python counterpart,
- *                       you can use it to destructively iterate over               
- *                       the list.
- *  update(list)      -- Updates the list with the entries of the input
- *                       list.
- *  copy()            -- Returns a deep copy of the list.
- *  each(callback)    -- Iterates over the entries in the list, passing
- *                       the parameter 'key'.
- *  next()            -- Iterates over the entries in the list returning
- *                       the key until the iteration is complete (calling
- *                       next() at this point will return undefined.
- *  object()          -- Returns the key value list as an object.
- *  isEqual(list)     -- Returns true if the lists are equivalent and false 
- *                       otherwise.
- */ 
+// Jaylist v2.0
+// Copyright (C) 2011 by Ben Brooks Scholz. MIT Licensed.
 
-/**
- * List allows access to elements through a key (string of characters).
- * _next is a placeholder for the next() iterator.
- */
+
+// List allows access to elements through a key (string of characters).
+// _next is a placeholder for the next() iterator.
 var list = function () {
     
     var _table = {};
@@ -158,10 +108,9 @@ var list = function () {
         _table : _table,
         _next : _next,
         
-        /**
-         * get: Returns the value attached to the given key or undefined 
-         * if it isn't found.
-         */
+        // get: Returns the value attached to the given key or undefined 
+        // if it isn't found.
+        //
         get : function (key) {
             if (this._table.hasOwnProperty(key))
                 return this._table[key];
@@ -169,21 +118,17 @@ var list = function () {
                 return undefined;
         },
         
-        /**
-         * add: Inserts an object into the list, assigning it to the given key.
-         * It returns the value upon successful addition to the list. If a value
-         * is inserted with a key that exists in the list already, the old value 
-         * is overwritten.
-         */
+        // add: Inserts an object into the list, assigning it to the given key.
+        // It returns the value upon successful addition to the list. If a value
+        // is inserted with a key that exists in the list already, the old value 
+        // is overwritten.
         add : function (key, value) {     
             return (this._table[key] = value);
         },
         
-        /**
-         * remove: Removes an object from the list with the given key. It returns
-         * undefined if no object with the given key exists in the list. Otherwise,
-         * it returns the value removed. A list or array of keys may also be passed.
-         */
+        // remove: Removes an object from the list with the given key. It returns
+        // undefined if no object with the given key exists in the list. Otherwise,
+        // it returns the value removed. A list or array of keys may also be passed.
         remove : function (item) {
             var nitem;
             
@@ -206,17 +151,13 @@ var list = function () {
             }
         },
 
-        /**
-         * keys: Returns an array of the keys in the List.
-         */
+        // keys: Returns an array of the keys in the List.
         keys : function () {
             return Object.keys(this._table);
         },
 
-        /**
-         * values: Returns an array of the values in the list. Duplicate values
-         * are only displayed once.
-         */
+        // values: Returns an array of the values in the list. Duplicate values
+        // are only displayed once.
         values : function () {
             var i, 
                 contains, 
@@ -245,9 +186,7 @@ var list = function () {
             return values;
         },
 
-        /**
-         * items: Returns an array of key-value pairs: [[key, value]]
-         */
+        // items: Returns an array of key-value pairs: [[key, value]]
         items : function () {
             var itemlist = [], 
                 self = this;
@@ -260,9 +199,7 @@ var list = function () {
             return itemlist;
         },
 
-        /**
-         * len: Returns the number of items in the list. Returns zero if empty.
-         */
+        // len: Returns the number of items in the list. Returns zero if empty.
         len : function () {
             var len = 0;
             
@@ -274,26 +211,20 @@ var list = function () {
             return len;
         },
 
-        /**
-         * clear: Removes the items from the list.
-         */
+        // clear: Removes the items from the list.
         clear : function () {
             this._table = {};
         },
 
-        /**
-         * hasKey: Returns true if the list contains the given key and false if
-         * if does not.
-         */
+        // hasKey: Returns true if the list contains the given key and false if
+        // if does not.
         hasKey : function (key) {
             return (this.get(key) !== undefined);
         },
 
-        /**
-         * pop: Returns the value associated with the key and removes it. If there
-         * is no value associated with the key, return undefined, & for that reason
-         * def is optional.
-         */
+        // pop: Returns the value associated with the key and removes it. If there
+        // is no value associated with the key, return undefined, & for that reason
+        // def is optional.
         pop : function (key, def) {
             if (this.hasKey(key))
                 this.remove(key);
@@ -301,9 +232,7 @@ var list = function () {
                 return def;
         },
 
-        /**
-         * popItem: Returns a random key value pair ( [key, value] ) and removes it.
-         */
+        // popItem: Returns a random key value pair ( [key, value] ) and removes it.
         popItem : function () {
             var pair,
                 keys = this.keys();
@@ -321,9 +250,7 @@ var list = function () {
             return pair;
         },
 
-        /**
-         * update: Adds all the entries from the input list to the list.
-         */
+        // update: Adds all the entries from the input list to the list.
         update : function (list) {
             var self = this;
 
@@ -333,9 +260,7 @@ var list = function () {
             });
         },
 
-        /**
-         * copy: Returns a deep copy of the list.
-         */
+        // copy: Returns a deep copy of the list.
         copy : function () {
             var copy = list();
             copy.update(_deepCopy(this));
@@ -343,20 +268,16 @@ var list = function () {
             return copy;
         },
 
-        /**
-         * each: Iterates over each entry in the list, calling the callback with the
-         * parameter 'key'.
-         */
+        // each: Iterates over each entry in the list, calling the callback with the
+        // parameter 'key'.
         each : function (callback) {
             for (var key in this._table)
                 if (this._table.hasOwnProperty(key))
                     callback(key);
         },
 
-        /**
-         * next: Iterates over the list, returning the key of next entry on each call.
-         * Returns undefined when the iteration is complete.
-         */
+        // next: Iterates over the list, returning the key of next entry on each call.
+        // Returns undefined when the iteration is complete.
         next : function () {
             // _next contains keys to iterate through
             if (this._next !== undefined && this._next.length !== 0)
@@ -374,16 +295,12 @@ var list = function () {
             }
         },
 
-        /**
-         * object: Return the key-value list as an object.
-         */
+        // object: Return the key-value list as an object.
         object : function () {
             return this._table;
         },
-        
-        /**
-         * isEqual: Returns true if the lists are equivalent and false otherwise.
-         */
+
+        // isEqual: Returns true if the lists are equivalent and false otherwise.
         isEqual : function (list) {           
             // check if list argument is actually a list
             if (!(_isList(list)))
