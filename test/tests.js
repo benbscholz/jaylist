@@ -1,184 +1,224 @@
-var jaylist = new List();
-var otherlist = new List();
-var copylist = new List();
+var jaylist = list(),
+	otherlist = list(),
+	copylist = list();
 
 otherlist.add("other", "list");
 
 module("jaylist Module");
 
-test("Add items", function() {
-    expect(6);
-    equals(jaylist.add("string", "string value"), "string value", 'Added ("string", "string value").');
-    equals(jaylist.add("number", 4), 4, 'Added ("number", 4).');
-    equals(jaylist.add("boolean", false), false, 'Added ("boolean", true).');
-    equals(jaylist.add("array", [1,2,3]).toString(), [1,2,3].toString(), 'Added ("array", [1,2,3]).');
-    equals(jaylist.add("object", otherlist), otherlist, 'Added ("object", otherlist).');
-    equals(jaylist.add("array", [4,5,6]).toString(), [4,5,6].toString(), 'Overwrite ("array", [1,2,3]) with ("array", [4,5,6]).');
+test("create lists", function() {
+	expect(3);
+	
+	var ceelist,
+		beelist = list();
+	ok(beelist, "create a list");
+	beelist.add("one", 1);
+	beelist.add("two", 2);
+	beelist.add("three", 3);
+	ceelist = beelist.copy();
+	ok(beelist.isEqual(ceelist), "list is copied");
+	beelist.clear();
+	equal(ceelist.get("one"), 1, "list is deep copied");
 });
 
-test("Contain functions", function() {
+test("add", function() {
     expect(6);
-    equals(jaylist.hasKey("string"), true, 'Has key "string".');
-    equals(jaylist.hasKey("number"), true, 'Has key "number".');
-    equals(jaylist.hasKey("boolean"), true, 'Has key "boolean".');
-    equals(jaylist.hasKey("array"), true, 'Has key "array".');
-    equals(jaylist.hasKey("object"), true, 'Has key "object".');
-    equals(jaylist.hasKey("missing"), false, 'Missing key "missing".');
+    
+    equal(jaylist.add("string", "string value"), "string value", 'Added ("string", "string value").');
+    equal(jaylist.add("number", 4), 4, 'Added ("number", 4).');
+    equal(jaylist.add("boolean", false), false, 'Added ("boolean", true).');
+    deepEqual(jaylist.add("array", [1,2,3]), [1,2,3], 'Added ("array", [1,2,3]).');
+    equal(jaylist.add("object", otherlist), otherlist, 'Added ("object", otherlist).');
+    deepEqual(jaylist.add("array", [4,5,6]), [4,5,6], 'Overwrite ("array", [1,2,3]) with ("array", [4,5,6]).');
 });
 
-test("Get items", function() {
+test("hasKey", function() {
     expect(6);
-    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
-    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
-    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
-    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
-    equals(jaylist.get("object"), otherlist, 'Retrieved the value of "object" (otherlist).');
-    equals(jaylist.get("missing"), undefined, 'Cannot retrieve a value not in the list (undefined).');
+    
+    equal(jaylist.hasKey("string"), true, 'Has key "string".');
+    equal(jaylist.hasKey("number"), true, 'Has key "number".');
+    equal(jaylist.hasKey("boolean"), true, 'Has key "boolean".');
+    equal(jaylist.hasKey("array"), true, 'Has key "array".');
+    equal(jaylist.hasKey("object"), true, 'Has key "object".');
+    equal(jaylist.hasKey("missing"), false, 'Missing key "missing".');
+});
+
+test("get", function() {
+    expect(6);
+    
+    equal(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equal(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equal(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    deepEqual(jaylist.get("array"), [4,5,6], 'Retrieved the value of "array" ([4,5,6]).');
+    equal(jaylist.get("object"), otherlist, 'Retrieved the value of "object" (otherlist).');
+    equal(jaylist.get("missing"), undefined, 'Cannot retrieve a value not in the list (undefined).');
 });
 
 
-test("Remove items", function() {
+test("remove", function() {
     expect(31);
+    
     copylist = jaylist.copy();
-    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+
+    equal(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
     jaylist.remove("string");
-    equals(jaylist.get("string"), undefined, 'Removed "string".');
-    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equal(jaylist.get("string"), undefined, 'Removed "string".');
+    
+    equal(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
     jaylist.remove("number");
-    equals(jaylist.get("number"), undefined, 'Removed "number".');
-    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    equal(jaylist.get("number"), undefined, 'Removed "number".');
+
+    equal(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
     jaylist.remove("boolean");
-    equals(jaylist.get("boolean"), undefined, 'Removed "boolean".');
-    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
+    equal(jaylist.get("boolean"), undefined, 'Removed "boolean".');
+
+    deepEqual(jaylist.get("array"), [4,5,6], 'Retrieved the value of "array" ([4,5,6]).');
     jaylist.remove("array");
-    equals(jaylist.get("array"), undefined, 'Removed "array".');
-    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+    equal(jaylist.get("array"), undefined, 'Removed "array".');
+
+    equal(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
     jaylist.remove("object");
-    equals(jaylist.get("object"), undefined, 'Removed "object".');
-    equals(jaylist.remove("missing"), undefined, 'Cannot remove value not in the list.');
+    equal(jaylist.get("object"), undefined, 'Removed "object".');
+    equal(jaylist.remove("missing"), undefined, 'Cannot remove value not in the list.');
+
     jaylist.update(copylist);
-    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
-    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
-    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
-    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
-    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
-    jaylist.remove(["string","number","boolean","array","object"]);
-    equals(jaylist.get("string"), undefined, 'Removed "string".');
-    equals(jaylist.get("number"), undefined, 'Removed "number".');
-    equals(jaylist.get("boolean"), undefined, 'Removed "boolean".');
-    equals(jaylist.get("array"), undefined, 'Removed "array".');
-    equals(jaylist.get("object"), undefined, 'Removed "object".');
-    jaylist.update(copylist);
-    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
-    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
-    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
-    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
-    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+    equal(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equal(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equal(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    deepEqual(jaylist.get("array"), [4,5,6], 'Retrieved the value of "array" ([4,5,6]).');
+    equal(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+	jaylist.remove(["string","number","boolean","array","object"]);
+    equal(jaylist.get("string"), undefined, 'Removed "string".');
+    equal(jaylist.get("number"), undefined, 'Removed "number".');
+    equal(jaylist.get("boolean"), undefined, 'Removed "boolean".');
+    equal(jaylist.get("array"), undefined, 'Removed "array".');
+    equal(jaylist.get("object"), undefined, 'Removed "object".');
+    
+	jaylist.update(copylist);
+    equal(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equal(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equal(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    deepEqual(jaylist.get("array"), [4,5,6], 'Retrieved the value of "array" ([4,5,6]).');
+    equal(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
     jaylist.remove(copylist);
-    equals(jaylist.get("string"), undefined, 'Removed "string".');
-    equals(jaylist.get("number"), undefined, 'Removed "number".');
-    equals(jaylist.get("boolean"), undefined, 'Removed "boolean".');
-    equals(jaylist.get("array"), undefined, 'Removed "array".');
-    equals(jaylist.get("object"), undefined, 'Removed "object".');
+    equal(jaylist.get("string"), undefined, 'Removed "string".');
+    equal(jaylist.get("number"), undefined, 'Removed "number".');
+    equal(jaylist.get("boolean"), undefined, 'Removed "boolean".');
+    equal(jaylist.get("array"), undefined, 'Removed "array".');
+    equal(jaylist.get("object"), undefined, 'Removed "object".');
 });
 
-test("Pop function", function () {
+test("pop", function () {
     expect(11);
+
     jaylist.update(copylist);
-    equals(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
+    equal(jaylist.get("string"), "string value", 'Retrieved the value of "string" ("string value").');
     jaylist.pop("string");
-    equals(jaylist.get("string"), undefined, 'Popped key.');
-    equals(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
+    equal(jaylist.get("string"), undefined, 'Popped key.');
+    
+    equal(jaylist.get("number"), 4, 'Retrieved the value of "number" (4).');
     jaylist.pop("number");
-    equals(jaylist.get("number"), undefined, 'Popped key.');
-    equals(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
+    equal(jaylist.get("number"), undefined, 'Popped key.');
+    
+    equal(jaylist.get("boolean"), false, 'Retrieved the value of "boolean" (false).');
     jaylist.pop("boolean");
-    equals(jaylist.get("boolean"), undefined, 'Popped key.');
-    equals(jaylist.get("array").toString(), [4,5,6].toString(), 'Retrieved the value of "array" ([4,5,6]).');
+    equal(jaylist.get("boolean"), undefined, 'Popped key.');
+    
+    deepEqual(jaylist.get("array"), [4,5,6], 'Retrieved the value of "array" ([4,5,6]).');
     jaylist.pop("array");
-    equals(jaylist.get("array"), undefined, 'Popped key.');
+    equal(jaylist.get("array"), undefined, 'Popped key.');
+    
     jaylist.add("object", otherlist);
-    equals(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
+    equal(jaylist.get("object").table, otherlist.table, 'Retrieved the value of "object" (otherlist).');
     jaylist.pop("object");
-    equals(jaylist.get("object"), undefined, 'Popped key.');
-    equals(jaylist.pop("Missing"), undefined, 'Popping missing key returns undefined.');
+    equal(jaylist.get("object"), undefined, 'Popped key.');
+    
+    equal(jaylist.pop("Missing"), undefined, 'Popping missing key returns undefined.');
 });
 
-test("popItem function", function () {
+test("popItem", function () {
     expect(2);
+    
     jaylist.add("pop", "item");
     ok(jaylist.hasKey("pop"), 'Popped a random item.');
     var popped = jaylist.popItem();
     ok(!jaylist.hasKey("pop"), 'Popped item removed from list.');
 });
 
-test("Mass retrieval", function() {
+test("keys, values, items", function() {
     expect(3);
     jaylist.update(copylist);
-    equals(jaylist.keys().toString(), 'string,number,boolean,array,object', 'Retrieved keys.');
-    equals(jaylist.values().toString(), 'string value,4,false,4,5,6,[object Object]', 'Retrieved values.');
-    equals(jaylist.items().toString(), 'string,string value,number,4,boolean,false,array,4,5,6,object,[object Object]', 'Retrieved items.');
+    deepEqual(jaylist.keys(), ['string','number','boolean','array','object'], 'Retrieved keys.');
+    deepEqual(jaylist.values(), ['string value',4,false,[4,5,6],copylist.object().object], 'Retrieved values.');
+    deepEqual(jaylist.items(), [['string','string value'],['number',4],['boolean',false],['array',[4,5,6]],['object',copylist.object().object]], 'Retrieved items.');
 });
 
-test("Length functions", function() {
+test("len", function() {
     expect(2);
-    equals(jaylist.len(), 5, 'Retrieved length.');
-    var emptylist = new List();
-    equals(emptylist.len(), 0, 'Retrieved empty list length.')
+    equal(jaylist.len(), 5, 'Retrieved length.');
+    var emptylist = list();
+    equal(emptylist.len(), 0, 'Retrieved empty list length.')
 });
 
-test("Clear functions", function() {
+test("clear", function() {
     expect(2);
-    equals(jaylist.len(), 5, 'Non-zero length retrieved.')
+    
+    equal(jaylist.len(), 5, 'Non-zero length retrieved.')
     jaylist.clear();
-    equals(jaylist.len(), 0, 'Cleared list.');
+    equal(jaylist.len(), 0, 'Cleared list.');
 });
 
-test("Update function", function() {
+test("update", function() {
     expect(1);
+    
     jaylist.update(otherlist);
-    equals(jaylist.keys().toString(), "other", 'Updated list with List.');
+    equal(jaylist.keys().toString(), "other", 'Updated list with list.');
 });
 
-test("Copy function", function() {
+test("copy", function() {
     expect(2);
+
     jaylist = copylist.copy();
-    equals(jaylist.keys().toString(), 'string,number,boolean,array,object', 'Retrieved keys.');
-    equals(jaylist.values().toString(), 'string value,4,false,4,5,6,[object Object]', 'Retrieved values.');
+    deepEqual(jaylist.keys(), ['string','number','boolean','array','object'], 'Retrieved keys.');
+    deepEqual(jaylist.values(), ['string value',4,false,[4,5,6],jaylist.get('object')], 'Retrieved values.');
 });
 
-test("Each function", function() {
+test("each", function() {
     expect(2);
-    equals(jaylist.len(), 5, "List of length 5.");
+    
+    equal(jaylist.len(), 5, "list of length 5.");
     jaylist.each(function(key){jaylist.pop(key)});
-    equals(jaylist.len(), 0, "Popped each item in the list");
+    equal(jaylist.len(), 0, "Popped each item in the list");
 });
 
-test("Next function", function() {
+test("next", function() {
     expect(3);
-    var alist = new List();
+    
+    var alist = list();
     alist.add("this", "that");
     alist.add("us", "them");
     ok(alist.hasKey(alist.next()));
     ok(alist.hasKey(alist.next()));
-    equals(alist.next(), undefined);
+    equal(alist.next(), undefined);
 });
 
-test("Object function", function() {
+test("object", function() {
     expect(2);
-    var listy = new List()
+    
+    var listy = list()
     listy.add("key1", "value1");
     listy.add("key2", "value2");
     var obj = listy.object();
-    equals(obj['key1'], "value1", "Retrieved value1.");
-    equals(obj['key2'], "value2", "Retrieved value2.");
+    equal(obj['key1'], "value1", "Retrieved value1.");
+    equal(obj['key2'], "value2", "Retrieved value2.");
 });
 
-test("Equality function", function() {
+test("isEqual", function() {
     expect(4);
+    
     jaylist.update(copylist);
-    ok(jaylist.isEqual(copylist), "Lists are equal");
-    ok(copylist.isEqual(jaylist), "Lists are equal");
-    ok(!jaylist.isEqual([1,2,3]), "List is not equal to an array");
-    ok(!jaylist.isEqual(otherlist), "List is not equal to list");
+    ok(jaylist.isEqual(copylist), "lists are equal");
+    ok(copylist.isEqual(jaylist), "lists are equal");
+    ok(!jaylist.isEqual([1,2,3]), "list is not equal to an array");
+    ok(!jaylist.isEqual(otherlist), "list is not equal to list");
 });
