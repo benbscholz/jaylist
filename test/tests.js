@@ -108,6 +108,19 @@ test("remove", function() {
     equal(jaylist.get("object"), undefined, 'Removed "object".');
 });
 
+test("take", function () {
+	expect(3);
+	var alist = list(),
+		blist = list();
+	alist.add("one", 1);
+	alist.add("two", 2);
+	alist.add("three", 3);
+	alist.add("four", 4);
+	deepEqual(alist.take(3), [["one",1],["two",2],["three",3]], "Take first three items of the list.");
+	deepEqual(alist.items(), [["four",4]], "Items were taken.");
+	deepEqual(blist.take(3), [], "Take nothing from empty list.");
+})
+
 test("pop", function () {
     expect(11);
 
