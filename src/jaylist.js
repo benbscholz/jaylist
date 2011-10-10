@@ -150,8 +150,20 @@ var list = function () {
                 return val;
             }
         },
+        
+        // take: Returns an array of key-value pairs of n-length from the beginning of the list.
+        take : function (n) {
+	    	var i = n,
+	    		item,
+	    		items = [];
+	    	while ((item = this.next()) && i--) {
+		    	items.push([item, this._table[item]]);
+		    	this.remove(item);
+	    	}
+	    	return items;
+        },
 
-        // keys: Returns an array of the keys in the List.
+        // keys: Returns an array of the keys in the list.
         keys : function () {
             return Object.keys(this._table);
         },
@@ -285,7 +297,7 @@ var list = function () {
                 
             // _next is empty; fill it with keys and pop one
             else if (this._next === undefined) {
-                this._next = this.keys();
+                this._next = this.keys().reverse();
                 return this._next.pop();
                 
             // iteration complete, reset _next
