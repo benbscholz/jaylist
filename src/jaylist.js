@@ -6,14 +6,9 @@ var list = function () {
     
     var _table = {};
     var _next;
-    
-    // replace 'instanceof List' with _isList(item), because instanceof 
-    // breaks without the 'new' operator.
+   
     var _isList = function (item) {
-        if (item._table && item.next)
-            return true;
-        else
-            return false;
+				return item._table && item.next;
     };
 
     var _isArray = function (item) {
@@ -24,7 +19,7 @@ var list = function () {
         else
             return false;
     };
-    
+   
     var _deepEquals = function (a_obj, b_obj) { 
         var i, 
             key, 
@@ -60,7 +55,7 @@ var list = function () {
                 
         return true;
     };
-    
+   
     var _deepCopy = function (obj) {
         var entry, 
             copied = {};
@@ -91,7 +86,7 @@ var list = function () {
     return {
         _table : _table,
         _next : _next,
-        
+       
         // get: Returns the value attached to the given key or undefined 
         // if it isn't found.
         get : function (key) {
@@ -108,7 +103,7 @@ var list = function () {
         add : function (key, value) {     
             return (this._table[key] = value);
         },
-        
+       
         // remove: Removes an object from the list with the given key. It returns
         // undefined if no object with the given key exists in the list. Otherwise,
         // it returns the value removed. A list or array of keys may also be passed.
@@ -130,18 +125,7 @@ var list = function () {
             }
         },
         
-        // take: Returns an array of key-value pairs of n-length from the beginning of the list.
-        take : function (n) {
-	    	var i = n,
-	    		item,
-	    		items = [];
-	    	while ((item = this.next()) && i--) {
-		    	items.push([item, this._table[item]]);
-		    	this.remove(item);
-	    	}
-	    	return items;
-        },
-
+        
         // keys: Returns an array of the keys in the list.
         keys : function () {
             return Object.keys(this._table);

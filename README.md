@@ -28,13 +28,6 @@ Much of the functionality was inspired by Python's dictionary.
 
     jaylist.remove("key");
 
-###Take items from the list:
-
-#### take(num)
---Returns an array of the first n-items of the list, removing them from the list in the process.
-
-	jaylist.take(2);
-
 ###Get the keys in the list:
 
 #### keys()
