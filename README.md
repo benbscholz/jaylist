@@ -124,4 +124,4 @@ Much of the functionality was inspired by Python's dictionary.
 #### isEqual(list)
 -- Returns true if the lists are equivalent and false otherwise.
 
-    jaylist.isEqual(list);
+    jaylist.isEqual(alist);
