@@ -1,4 +1,4 @@
-
+// Jaylist tests.
 
 module('jaylist module');
 
@@ -31,7 +31,7 @@ test('hasKey: check a list for keys', function () {
 
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',   false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -51,7 +51,7 @@ test('get: retrieve values using a key', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -70,7 +70,7 @@ test('remove: remove values using a key', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -99,14 +99,14 @@ test('keys: return the keys in the list', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
 		deepEqual(xs.keys(), ['string', 'number', 'boolean', 'object', 'array'], 'Popped the value of "string".');
 });
 
-test('values: return values in the list, function () {
+test('values: return values in the list', function () {
 		expect(1);
 		
 		var xs = list();
@@ -114,28 +114,25 @@ test('values: return values in the list, function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
 		deepEqual(xs.values(), ['strval', 18593214, false, ys, [1,2,3,4]], 'Popped the value of "string".');
 });
 
-test('items: return (key, value) pairs in the list, function () {
+test('items: return (key, value) pairs in the list', function () {
 		expect(1);
 		
 		var xs = list();
-		var ys = list();
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
-		xs.add('object',       ys);
+		xs.add('boolean',    false);
 		xs.add('array', [1,2,3,4]);
 
-		deepEqual(xs.values(), [['string', 'strval'], ['number', 18593214],
-														['boolean',   false], ['object',       ys], 
-														['array', [1,2,3,4]]], 'Popped the value of "string".');
+		deepEqual(xs.items(), [['string', 'strval'], ['number', 18593214],
+													 ['boolean',   false], ['array', [1,2,3,4]]], 'Retrieved [key, value] list.');
 });
 
 test('len: return the number of items in the list', function () {
@@ -146,7 +143,7 @@ test('len: return the number of items in the list', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -162,7 +159,7 @@ test('clear: empty the list', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -176,15 +173,16 @@ test('update: add the contents of one list to another', function () {
 
 		var xs = list();
 		var ys = list();
+		var zs = list();
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
-		xs.add('object',       ys);
+		xs.add('boolean',    false);
+		xs.add('object',       zs);
 		xs.add('array', [1,2,3,4]);
 
 		ys.update(xs);
-		deepEqual(xs, ys, 'List updated.');
+		deepEqual(xs._table, ys._table, 'List updated.');
 });
 
 test('copy: return a deep copy of the list', function () {
@@ -196,12 +194,11 @@ test('copy: return a deep copy of the list', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
-		xs.add('object',       ys);
+		xs.add('boolean',    false);
 		xs.add('array', [1,2,3,4]);
 
 		ws = xs.copy();
-		deepEqual(xs, ws, 'List copied.');
+		deepEqual(xs._table, ws._table, 'List copied.');
 });
 
 test('each: execute a callback for each key in the list', function () {
@@ -212,31 +209,31 @@ test('each: execute a callback for each key in the list', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
-		xs.each(xs.remove);
+		xs.each(function(key){xs.remove(key);});
 		equal(xs.len(), 0, 'Callback `remove` executed.');
 });
 
 test('next: loop-style iteration', function () {
-		expect(5);
+		expect(6);
 
 		var xs = list();
 		var ys = list();
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
-		deepEqual(xs.next(),  'strval', '`string` retrieved.');
-		deepEqual(xs.next(),  18593214, '`number` retrieved.');
-		deepEqual(xs.next(),     false, '`boolean` retrieved.');
-		deepEqual(xs.next(),        ys, '`object` retrieved.');
-		deepEqual(xs.next(), [1,2,3,4], '`array` retrieved.');
+		deepEqual(xs.next(), 'string', '`string` retrieved.');
+		deepEqual(xs.next(), 'number', '`number` retrieved.');
+		deepEqual(xs.next(), 'boolean', '`boolean` retrieved.');
+		deepEqual(xs.next(), 'object', '`object` retrieved.');
+		deepEqual(xs.next(), 'array', '`array` retrieved.');
 		deepEqual(xs.next(), undefined, 'iteration complete.');
 });
 
@@ -248,7 +245,7 @@ test('object: returns the list in object-literal form', function () {
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
+		xs.add('boolean',    false);
 		xs.add('object',       ys);
 		xs.add('array', [1,2,3,4]);
 
@@ -260,24 +257,26 @@ test('object: returns the list in object-literal form', function () {
 });
 
 test('isEqual: list equality', function () {
-		expect(1);
+		expect(2);
 
 		var xs = list();
 		var ys = list();
+		var zs = list();
 		
 		xs.add('string', 'strval');
 		xs.add('number', 18593214);
-		xs.add('boolean,    false);
-		xs.add('object',       ys);
+		xs.add('boolean',    false);
+		xs.add('object',       zs);
 		xs.add('array', [1,2,3,4]);
 
 		ys.add('string', 'strval');
 		ys.add('number', 18593214);
-		ys.add('boolean,    false);
-		ys.add('object',       ys);
+		ys.add('boolean',    false);
+		ys.add('object',       zs);
 		ys.add('array', [1,2,3,4]);
 	
-		ok(isEqual(xs, ys), 'Lists are equal.');
+		ok(xs.isEqual(ys), 'Lists are equal.');
+		ok(ys.isEqual(xs), 'Lists are equal.');
 });
 
 
