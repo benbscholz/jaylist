@@ -100,7 +100,10 @@ var list = function () {
         // get: Returns the value attached to the given key or undefined 
         // if it isn't found.
         get : function (key) {
-	    return this._table.hasOwnProperty(key) ? this._table[key] : undefined;
+            if (this._table.hasOwnProperty(key) && this._table[key] !== undefined)
+		return this._table[key];
+	    else
+		return undefined;
         },
         
         // add: Inserts an object into the list, assigning it to the given key.
@@ -125,7 +128,8 @@ var list = function () {
         // list. Otherwise, it returns the value removed. A list or array 
         // of keys may also be passed.
         remove : function (item) {
-            var nitem;
+            var nitem, 
+		val;
             
             if (_isList(item)) {
                 while ((nitem = item.next())) 
@@ -136,7 +140,7 @@ var list = function () {
                     delete this._table[item.pop()];
                         
             } else {
-                var val = this._table[item];
+                val = this._table[item];
                 delete this._table[item];
                 return val;
             }
@@ -172,7 +176,7 @@ var list = function () {
             var len = 0;
             
             this.each(function () { 
-                len = len + 1; 
+                len += 1; 
             });
             
             return len;
@@ -237,10 +241,7 @@ var list = function () {
 
         // isEqual: Returns true if the lists are equivalent and false otherwise.
         isEqual : function (list) {           
-            if (!(_isList(list)))
-                return false;
-                
-            return _deepEquals(this._table, list._table);
+	    return !_isList(list) ? false : _deepEquals(this._table, list._table);
         }
     };
 };
