@@ -1,4 +1,4 @@
-// Jaylist v2.1
+// Jaylist v2.2
 // Copyright (C) 2011 by Ben Brooks Scholz. MIT Licensed.
 
 
@@ -187,31 +187,6 @@ var list = function () {
         // if does not.
         hasKey : function (key) {
             return (this.get(key) !== undefined);
-        },
-
-        // pop: Returns the value associated with the key and removes it. If there
-        // is no value associated with the key, return undefined, & for that reason
-        // def is optional.
-        pop : function (key, def) {
-            if (this.hasKey(key))
-                this.remove(key);
-            else
-                return def;
-        },
-
-        // popItem: Returns a random key value pair ( [key, value] ) and removes it.
-        popItem : function () {
-            var pair,
-                keys = this.keys();
-            
-            if (keys.length === 0)
-                return undefined;
-                
-            pair = [keys[0]];
-            
-            pair.push(this.remove(pair[0]));
-            
-            return pair;
         },
 
         // update: Adds all the entries from the input list to the list.

@@ -130,22 +130,6 @@ Much of the functionality was inspired by Python's dictionary.
     jaylist.hasKey(key);
 
 
-###Pop the key from the list:
-
-#### pop(key, def)
--- Returns the value associated with the key, deleting it from the list. Return default if the key is not associated with any value. Default is an optional argument that is set to undefined.
-
-    jaylist.pop(key);
-
-
-###Pop an item from the list:
-
-#### popItem()
--- Returns a random key-value pair ( [key,value] ) and removes it from the list.
-
-    jaylist.popItem();
-
-
 ###Update a list with another list:
     
 #### update(list)
