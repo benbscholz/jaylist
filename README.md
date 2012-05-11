@@ -17,7 +17,7 @@ Much of the functionality was inspired by Python's dictionary.
 		jaylist.keys();
 
 		// let's view the values in the list
-		// -> ["strings", 1638423]
+		// -> ["strings", 1638423, [1,2,3,4,5]]
 		jaylist.values();
 
 		// let's remove an item
