@@ -1,0 +1,266 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Jaylist</title>
+  <meta name="description" content="jaylist is a very simple key-value list.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Jaylist</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">jaylist is a very simple key-value list.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/benbscholz/jaylist/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/benbscholz/jaylist/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/benbscholz/jaylist" class="code">View Jaylist on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>jaylist</h1>
+
+<p>a simple wrapper for javascript's built-in hash storage. 
+Much of the functionality was inspired by Python's dictionary.</p>
+
+<h2>demo</h2>
+
+<pre><code>    // let's create a list
+    var jaylist = list();
+
+    // and add some items
+    jaylist.add("here", "strings");
+    jaylist.add("there", 1638423);
+    jaylist.add("these", [1,2,3,4,5]);
+
+    // let's view the keys in the list
+    // -&gt; ["here", "there", "these"]
+    jaylist.keys();
+
+    // let's view the values in the list
+    // -&gt; ["strings", 1638423]
+    jaylist.values();
+
+    // let's remove an item
+    jaylist.remove("here");
+
+    // trying to retrieve an item that doesn't exist yields undefined
+    // -&gt; undefined
+    jaylist.get("here");
+
+    // -&gt; 1638423
+    jaylist.get("there");
+
+    // deep copy a list
+    var beelist = jaylist.copy();
+
+    // list equality
+    // -&gt; true
+    jaylist.isEqual(beelist);
+
+    // empty a list
+    jaylist.clear();
+
+    // iteration with a callback 
+    beelist.each(function(key){console.log(key);});
+
+    // iteration with a loop
+    var item;
+    while (item = beelist.next()) {
+            console.log(item);
+    }       
+
+    // update a list with the contents of another
+    jaylist.update(beelist);
+</code></pre>
+
+<h2>Functions:</h2>
+
+<h3>Create the list:</h3>
+
+<pre><code>var jaylist = list(); 
+</code></pre>
+
+<h3>Add a value to the list:</h3>
+
+<h4>add(key, value)</h4>
+
+<p>--Insert an object into the list, overwriting any value already assigned to the key. Returns the value upon successful addition.</p>
+
+<pre><code>jaylist.add("key", value);
+</code></pre>
+
+<h3>Get the value from the list:</h3>
+
+<h4>get(key)</h4>
+
+<p>--Returns the value associated with key, undefined if the key has not been entered into the list.</p>
+
+<pre><code>var val = jaylist.get("key"); 
+</code></pre>
+
+<h3>Remove the value from the list:</h3>
+
+<h4>remove(key)</h4>
+
+<p>--Removes the object from the list. Returns undefined if no value is assigned to the key. Upon successful removal, it returns the value removed. A list or array of keys may also be passed.</p>
+
+<pre><code>jaylist.remove("key");
+</code></pre>
+
+<h3>Get the keys in the list:</h3>
+
+<h4>keys()</h4>
+
+<p>--Returns an array of the keys in the list.</p>
+
+<pre><code>var keys = jaylist.keys();
+</code></pre>
+
+<h3>Get the values in the list:</h3>
+
+<h4>values()</h4>
+
+<p>--Returns an array of the values in the list.</p>
+
+<pre><code>var values = jaylist.values();
+</code></pre>
+
+<h3>Get the items in the list:</h3>
+
+<h4>items()</h4>
+
+<p>--Returns an array of key-value pairs. [[key, value]]</p>
+
+<pre><code>var items = jaylist.items();
+</code></pre>
+
+<h3>Get the length of the list:</h3>
+
+<h4>len()</h4>
+
+<p>--Returns the number of elements in the list, 0 when empty.</p>
+
+<pre><code>var len = jaylist.len();    
+</code></pre>
+
+<h3>Clear the list:</h3>
+
+<h4>clear()</h4>
+
+<p>--Removes all the items from the list.</p>
+
+<pre><code>jaylist.clear();
+</code></pre>
+
+<h3>Check if the list contains the key:</h3>
+
+<h4>hasKey(key)</h4>
+
+<p>-- Returns true if the list contains the key and false otherwise.</p>
+
+<pre><code>jaylist.hasKey(key);
+</code></pre>
+
+<h3>Update a list with another list:</h3>
+
+<h4>update(list)</h4>
+
+<p>-- Adds the entries of the input list to the list.</p>
+
+<pre><code>jaylist.update(somelist);
+</code></pre>
+
+<h3>Deep copy a list:</h3>
+
+<h4>copy()</h4>
+
+<p>-- Returns a deep copy of the list.</p>
+
+<pre><code>var newlist = jaylist.copy();
+</code></pre>
+
+<h3>Iterate through a list:</h3>
+
+<h4>each(callback)</h4>
+
+<p>-- Iterates through each entry in the list, calling callback with parameter key for each value.</p>
+
+<pre><code>jaylist.each(function(key){somefunction(key);});
+</code></pre>
+
+<h3>Iterate through a list:</h3>
+
+<h4>next()</h4>
+
+<p>-- Iterates through each entry in the list, returning a key on each call. When the iteration is complete, next() returns undefined &amp; the iteration can begin again.</p>
+
+<pre><code>while(jaylist.next()) {...}
+</code></pre>
+
+<h3>Return an object representation of the list:</h3>
+
+<h4>object()</h4>
+
+<p>-- Returns the list as an object of key-value pairs.</p>
+
+<pre><code>var obj = jaylist.object();
+</code></pre>
+
+<h3>Check if two lists are equal:</h3>
+
+<h4>isEqual(list)</h4>
+
+<p>-- Returns true if the lists are equivalent and false otherwise.</p>
+
+<pre><code>jaylist.isEqual(alist);
+</code></pre>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/benbscholz" class="avatar"><img src="https://secure.gravatar.com/avatar/152bef6e3840b7292b1c3eccff3cdc1f?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="48" height="48"/></a> <a href="https://github.com/benbscholz">benbscholz</a> maintains <a href="https://github.com/benbscholz/jaylist">Jaylist</a></p>
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/benbscholz/jaylist/tarball/master" class="tar">tar</a><a href="https://github.com/benbscholz/jaylist/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-22784247-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+</body>
+</html>
