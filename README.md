@@ -93,7 +93,7 @@ Much of the functionality was inspired by Python's dictionary.
 ###Get the values in the list:
 
 #### values()
---Returns an array of the values in the list with each value appearing only once.
+--Returns an array of the values in the list.
 
     var values = jaylist.values();
 
