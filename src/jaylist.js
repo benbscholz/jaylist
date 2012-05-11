@@ -19,6 +19,16 @@ var list = function () {
         else
             return false;
     };
+
+		var _zipArray = function (a, b) {
+				var i,
+					  zipped = [];
+
+				for (i = 0; i < a.length; i += 1) 
+						zipped.push([a[i], b[i]]);
+
+				return zipped
+		};
    
     var _deepEquals = function (a_obj, b_obj) { 
         var i, 
@@ -135,21 +145,11 @@ var list = function () {
         // are only displayed once.
         values : function () {
             var i, 
-                contains, 
                 self = this, 
                 values = [];
                 
             this.each(function (key) {
-                    
-                contains = false;
-                i = values.length;
-                    
-                while (i-- && !contains)
-                    if (self.get(key) === values[i])
-                        contains = true;
-                    
-                if (!contains)
-                    values.push(self.get(key));
+                values.push(self.get(key));
             });
                 
             return values;
@@ -157,14 +157,7 @@ var list = function () {
 
         // items: Returns an array of key-value pairs: [[key, value]]
         items : function () {
-            var itemlist = [], 
-                self = this;
-            
-            this.each(function (key) { 
-                itemlist.push([key, self._table[key]]); 
-            });
-            
-            return itemlist;
+						return _zipArray(this.keys(), this.values());
         },
 
         // len: Returns the number of items in the list. Returns zero if empty.
