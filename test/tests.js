@@ -45,7 +45,7 @@ test('hasKey: check a list for keys', function () {
 });
 
 test('get: retrieve values using a key', function () {
-		expect(5);
+		expect(6);
 		
 		var xs = list();
 		var ys = list();
@@ -61,6 +61,7 @@ test('get: retrieve values using a key', function () {
 		deepEqual(xs.get('boolean'),false,    'Retrieved the value of "boolean".');
 		deepEqual(xs.get('object'), ys,       'Retrieved the value of "object".');
 		deepEqual(xs.get('array'),  [1,2,3,4],'Retrieved the value of "array".');
+		deepEqual(xs.get('hasOwnProperty'), undefined, 'Cannot retrieve property.');
 });
 
 test('remove: remove values using a key', function () {

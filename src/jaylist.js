@@ -100,10 +100,7 @@ var list = function () {
         // get: Returns the value attached to the given key or undefined 
         // if it isn't found.
         get : function (key) {
-            if (this._table.hasOwnProperty(key))
-                return this._table[key];
-            else
-                return undefined;
+	    return this._table.hasOwnProperty(key) ? this._table[key] : undefined;
         },
         
         // add: Inserts an object into the list, assigning it to the given key.
