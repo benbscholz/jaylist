@@ -8,7 +8,7 @@ var list = function () {
     var _next;
    
     var _isList = function (item) {
-				return item._table && item.next;
+        return item._table && item.next;
     };
 
     var _isArray = function (item) {
@@ -20,16 +20,16 @@ var list = function () {
             return false;
     };
 
-		var _zipArray = function (a, b) {
-				var i,
-					  zipped = [];
+    var _zipArray = function (a, b) {
+        var i,
+            zipped = [];
 
-				for (i = 0; i < a.length; i += 1) 
-						zipped.push([a[i], b[i]]);
+        for (i = 0; i < a.length; i += 1) 
+            zipped.push([a[i], b[i]]);
 
-				return zipped
-		};
-   
+        return zipped
+    };
+
     var _deepEquals = function (a_obj, b_obj) { 
         var i, 
             key, 
@@ -109,14 +109,24 @@ var list = function () {
         // add: Inserts an object into the list, assigning it to the given key.
         // It returns the value upon successful addition to the list. If a value
         // is inserted with a key that exists in the list already, the old value 
-        // is overwritten.
+        // is overwritten. Add throws an error if the key passed is an internal
+        // property like 'hasOwnProperty'.
         add : function (key, value) {     
-            return (this._table[key] = value);
+            try {
+                if (this._table.hasOwnProperty(key) === !!this._table[key])
+                    return (this._table[key] = value);
+                else
+                    throw "Error: key " + key + " is a built-in property.";
+            } catch (ex) {
+                console.log(ex);
+                return undefined;
+            };
         },
        
-        // remove: Removes an object from the list with the given key. It returns
-        // undefined if no object with the given key exists in the list. Otherwise,
-        // it returns the value removed. A list or array of keys may also be passed.
+        // remove: Removes an object from the list with the given key. It 
+        // returns undefined if no object with the given key exists in the 
+        // list. Otherwise, it returns the value removed. A list or array 
+        // of keys may also be passed.
         remove : function (item) {
             var nitem;
             
@@ -157,7 +167,7 @@ var list = function () {
 
         // items: Returns an array of key-value pairs: [[key, value]]
         items : function () {
-						return _zipArray(this.keys(), this.values());
+            return _zipArray(this.keys(), this.values());
         },
 
         // len: Returns the number of items in the list. Returns zero if empty.
@@ -199,16 +209,16 @@ var list = function () {
             return copy;
         },
 
-        // each: Iterates over each entry in the list, calling the callback with the
-        // parameter 'key'.
+        // each: Iterates over each entry in the list, calling the callback 
+        // with the parameter 'key'.
         each : function (callback) {
             for (var key in this._table)
                 if (this._table.hasOwnProperty(key))
                     callback(key);
         },
 
-        // next: Iterates over the list, returning the key of next entry on each call.
-        // Returns undefined when the iteration is complete.
+        // next: Iterates over the list, returning the key of next entry 
+        // on each call. Returns undefined when the iteration is complete.
         next : function () {
             if (this._next !== undefined && this._next.length !== 0)
                 return this._next.pop();
@@ -237,3 +247,4 @@ var list = function () {
         }
     };
 };
+
