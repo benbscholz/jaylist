@@ -10,7 +10,7 @@ test('create a list', function () {
 });
 
 test('add: add items to a list', function () {
-		expect(7);
+		expect(8);
 
 		var xs = list();
 		var ys = list();
@@ -18,7 +18,8 @@ test('add: add items to a list', function () {
 		deepEqual(xs.add('string', 'strval'), 'strval', 'Added ("string", "strval").');
 		deepEqual(xs.add('number', 18593214), 18593214, 'Added ("number", 18593214).');
 		deepEqual(xs.add('boolean',   false),    false, 'Added ("boolean",   false).');
-		deepEqual(xs.add('object',	     ys),       ys, 'Added ("object",       ys).');
+		deepEqual(xs.add('boolean',    true),     true, 'Added ("boolean",    true).');
+		deepEqual(xs.add('object',       ys),       ys, 'Added ("object",       ys).');
 		deepEqual(xs.add('array', [1,2,3,4]), [1,2,3,4],'Added ("array", [1,2,3,4]).');
 		deepEqual(xs.add('array', [4,3,2,1]), [4,3,2,1],'Added ("array", [4,3,2,1]).');
 		deepEqual(xs.add('hasOwnProperty'), undefined, 'Cannot add property.');

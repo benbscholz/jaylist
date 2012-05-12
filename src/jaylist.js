@@ -100,7 +100,8 @@ var list = function () {
         // get: Returns the value attached to the given key or undefined 
         // if it isn't found.
         get : function (key) {
-            if (this._table.hasOwnProperty(key) && this._table[key] !== undefined)
+	    var empty = {};
+            if (empty[key] === undefined)
 		return this._table[key];
 	    else
 		return undefined;
@@ -112,8 +113,9 @@ var list = function () {
         // is overwritten. Add throws an error if the key passed is an internal
         // property like 'hasOwnProperty'.
         add : function (key, value) {     
+	    var empty = {};
             try {
-                if (this._table.hasOwnProperty(key) === !!this._table[key])
+                if (empty[key] === undefined)
                     return (this._table[key] = value);
                 else
                     throw "Error: key " + key + " is a built-in property.";
