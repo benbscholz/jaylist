@@ -281,28 +281,3 @@ test('isEqual: list equality', function () {
 		ok(xs.isEqual(ys), 'Lists are equal.');
 		ok(ys.isEqual(xs), 'Lists are equal.');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
