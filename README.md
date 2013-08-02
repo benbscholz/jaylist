@@ -2,6 +2,8 @@
 A simple wrapper for javascript's built-in hash storage. 
 Much of the functionality was inspired by Python's dictionary.
 
+[![Build Status](https://travis-ci.org/benbscholz/jaylist.png?branch=master)](https://travis-ci.org/benbscholz/jaylist)
+
 ## demo
 
 		// let's create a list
