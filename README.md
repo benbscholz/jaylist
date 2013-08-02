@@ -1,5 +1,5 @@
 # jaylist
-a simple wrapper for javascript's built-in hash storage. 
+A simple wrapper for javascript's built-in hash storage. 
 Much of the functionality was inspired by Python's dictionary.
 
 ## demo
